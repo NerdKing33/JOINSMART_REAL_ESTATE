@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:housing_information_website/impVariable.dart';
 import 'package:housing_information_website/pages/homePage.dart';
+import 'package:housing_information_website/pages/propertiesPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
 
 void main() {
@@ -29,12 +30,12 @@ class _MyAppState extends State<MyApp> {
       title: titleCptl,
       routes: {
         '/homePage' : (context) => const homePage(),
-        '/searchPage' : (context) => const homePage(),
+        '/propertiesPage' : (context) => const propertiesPage(),
       },
       theme: lightMode,
       darkTheme: darkMode,
       debugShowCheckedModeBanner: false,
-      home: homePage(),
+      home: propertiesPage(),
     );
   }
 }

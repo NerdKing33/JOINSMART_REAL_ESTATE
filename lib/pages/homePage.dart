@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/themes/theme.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../impVariable.dart';
 
@@ -59,32 +60,35 @@ class _homePageState extends State<homePage> with TickerProviderStateMixin{
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        toolbarHeight: 58,
+        toolbarHeight: 60,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-          TextButton(
-              onPressed: (){},
-              child: Row(
-            children: [
-              ///theLogo
-              CircleAvatar(
-                backgroundImage: AssetImage(jeLogo),
-                radius: 18,
-              ),
-              sb5,
-              ///theTitle
-              Text(
-                titleCptl,
-                style: GoogleFonts.poppins(
-                    fontSize:18,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary
-                ),
-              ),
-            ],
-          )
-          ),
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            ///theUpperLeftChatter
+            TextButton(
+                onPressed: (){},
+                child: Row(
+                  children: [
+                    ///theLogo
+                    CircleAvatar(
+                      backgroundImage: AssetImage(jeLogo),
+                      radius: 18,
+                    ),
+                    sb5,
+                    ///theTitle
+                    Text(
+                      titleCptl,
+                      style: GoogleFonts.poppins(
+                          fontSize:18,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.secondary,
+                          letterSpacing: 1.5,
+                          wordSpacing: 2.0
+                      ),
+                    ),
+                  ],
+                )
+            ),
             ///these are the action buttons
             Container(
               decoration: BoxDecoration(
@@ -92,264 +96,784 @@ class _homePageState extends State<homePage> with TickerProviderStateMixin{
                 color: pRed,
               ),
               child: ButtonBar(
-                 children: [
-                   Container(
-                     padding: const EdgeInsets.all(.0),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(15.0),
-                       color: Colors.white,
-                     ),
-                     child: TextButton(
-                         onPressed: (){},
-                         child: Text(
-                           'Home',
-                           style: GoogleFonts.poppins(
-                             fontWeight: FontWeight.w400,
-                             color: selectedColor,
-                               fontSize: 13
-                           ),
-                         )
-                     ),
-                   ),
-                   Container(
-                     padding: const EdgeInsets.all(.0),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(15.0),
-                       color: Colors.white,
-                     ),
-                     child: TextButton(
-                         onPressed: (){},
-                         child: Text(
-                           'Services',
-                           style: GoogleFonts.poppins(
-                             fontWeight: FontWeight.w400,
-                             color: unselectedColor,
-                               fontSize: 13
-                           ),
-                         )
-                     ),
-                   ),
-                   Container(
-                     padding: const EdgeInsets.all(.0),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(15.0),
-                       color: Colors.white,
-                     ),
-                     child: TextButton(
-                         onPressed: (){},
-                         child: Text(
-                           'Properties',
-                           style: GoogleFonts.poppins(
-                             fontWeight: FontWeight.w400,
-                             color: unselectedColor,
-                               fontSize: 13
-                           ),
-                         )
-                     ),
-                   ),
-                   Container(
-                     padding: const EdgeInsets.all(.0),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(15.0),
-                       color: Colors.white,
-                     ),
-                     child: TextButton(
-                         onPressed: (){},
-                         child: Text(
-                           'About',
-                           style: GoogleFonts.poppins(
-                             fontWeight: FontWeight.w400,
-                             color: unselectedColor,
-                               fontSize: 13
-                           ),
-                         )
-                     ),
-                   ),
-                   Container(
-                     padding: const EdgeInsets.all(.0),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(15.0),
-                       color: Colors.white,
-                     ),
-                     child: TextButton(
-                         onPressed: (){},
-                         child: Text(
-                           'Account',
-                           style: GoogleFonts.poppins(
-                             fontWeight: FontWeight.w400,
-                             color: unselectedColor,
-                               fontSize: 13
-                           ),
-                         )
-                     ),
-                   ),
-                 ],
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Colors.white,
+                    ),
+                    child: TextButton(
+                        onPressed: (){},
+                        child: Text(
+                          'Home',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w400,
+                              color: selectedColor,
+                              fontSize: 13
+                          ),
+                        )
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Colors.white,
+                    ),
+                    child: TextButton(
+                        onPressed: (){},
+                        child: Text(
+                          'Services',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w400,
+                              color: unselectedColor,
+                              fontSize: 13
+                          ),
+                        )
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Colors.white,
+                    ),
+                    child: TextButton(
+                        onPressed: (){},
+                        child: Text(
+                          'Properties',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w400,
+                              color: unselectedColor,
+                              fontSize: 13
+                          ),
+                        )
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Colors.white,
+                    ),
+                    child: TextButton(
+                        onPressed: (){},
+                        child: Text(
+                          'About',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w400,
+                              color: unselectedColor,
+                              fontSize: 13
+                          ),
+                        )
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Colors.white,
+                    ),
+                    child: TextButton(
+                        onPressed: (){},
+                        child: Text(
+                          'Account',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w400,
+                              color: unselectedColor,
+                              fontSize: 13
+                          ),
+                        )
+                    ),
+                  ),
+                ],
               ),
             ),
+            sb90
           ],
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: AspectRatio(
-              aspectRatio: 55/16,
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(8.0)
-                ),
-                child: TextButton(
-                    onPressed: (){
-
-                    },
-                    child: Text(
-                  'Contact Us',
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
-                  ),
-                )),
+            child: Container(
+              padding: const EdgeInsets.all(4.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              child: TextButton(
+                  onPressed: (){},
+                  child:  Text(
+                    'CONTACT US',
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                      wordSpacing: 1.5,
+                    ),
+                  )
               ),
             ),
           )
         ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.all(6.0),
+        //     child: Container(
+        //       padding: const EdgeInsets.all(4.0),
+        //       decoration: BoxDecoration(
+        //           color: pRed,
+        //           borderRadius: BorderRadius.circular(8.0)
+        //       ),
+        //       child: Row(
+        //         children: [
+        //           sb2,
+        //           GestureDetector(
+        //             child: Container(
+        //               width: 35,
+        //               height: 35,
+        //               padding: const EdgeInsets.all(8.0),
+        //               decoration: BoxDecoration(
+        //                 borderRadius: BorderRadius.circular(8.0),
+        //                 color: Colors.white,
+        //               ),
+        //               child: const Center(
+        //                 child: Icon(
+        //                   Icons.phone_outlined,
+        //                   color: Colors.black,
+        //                   weight: 1.0,
+        //                   fill: .0,
+        //                   grade: 1.0,
+        //                   size: 18,
+        //                 ),
+        //               ),
+        //             ),
+        //           ),
+        //           sb2, sb2,
+        //           GestureDetector(
+        //             child: Container(
+        //               width: 35,
+        //               height: 35,
+        //               padding: const EdgeInsets.all(8.0),
+        //               decoration: BoxDecoration(
+        //                 borderRadius: BorderRadius.circular(8.0),
+        //                 color: Colors.white,
+        //               ),
+        //               child: const Center(
+        //                 child: Icon(
+        //                   Icons.person_outline_sharp,
+        //                   color: Colors.black,
+        //                   weight: 1.0,
+        //                   fill: .0,
+        //                   grade: 1.0,
+        //                   size: 18,
+        //                 ),
+        //               ),
+        //             ),
+        //           ),
+        //           sb2,
+        //         ],
+        //       ),
+        //     ),
+        //   )
+        // ],
       ),
       body: ListView(
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 500,
-            decoration: BoxDecoration(
+          AspectRatio(
+            aspectRatio: 5/2,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
                 color: pRed,
-            ),
-            child:  Stack(
-              alignment: const Alignment(-.43, .6),
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ///theTopIntroTextToTheWebsite
-                    Padding(
-                      padding: const EdgeInsets.only(right: 45.0),
-                      child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '  To achieve the above,\n  We pride ourselves on our ',
-                                style:GoogleFonts.poppins(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black
-                                ),
-                              ),
-                              Text(
-                                '  Company Values',
-                                style:GoogleFonts.poppins(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w500,
-                                    color: Theme.of(context).colorScheme.secondary
-                                ),
-                              ),
-                            ],
-                          ),
-                    ),
-                    ///theTopIntroImageToTheWebsite
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: 380,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+              ),
+              child:  Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ///theTopIntroTextToTheWebsite
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      sbH100,
+                      sbH40,
+                      Text(
+                        'Find Properties',
+                        style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontSize: 18
+                        ),
+                      ),
+                      RichText(
+                        text: TextSpan(
                           children: [
-                            AspectRatio(
-                              aspectRatio: 1,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  color: pRed,
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                      filterQuality: FilterQuality.high,
-                                      image: AssetImage(
-                                        constructionImage,
+                            TextSpan(
+                             text:  'The Most Suitable ',
+                              style:GoogleFonts.poppins(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black
+                              ),
+                            ),
+                            TextSpan(
+                             text:  '\nReal Estate Property For You ',
+                              style:GoogleFonts.poppins(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w400,
+                                  color: Theme.of(context).colorScheme.secondary
+                              ),
+                            )
+                          ]
+                        ),
+                      ),
+                      Text(
+                        "Search below from our range of property options, go ahead find your next \nhome, office, studio, renting unit and so much more ",
+                        style: GoogleFonts.poppins(
+                            color: Colors.grey.shade800,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12
+                        ),
+                      ),
+                      sbH20,
+                      Container(
+                        height: 80,
+                        width: 570,
+                        padding: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.primary,
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.primary,
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+
+                            ),
+                            IconButton(
+                                onPressed: (){},
+                                icon: const Icon(
+                                  Icons.filter_list_outlined,
+                                  color: Colors.black,
+                                )
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.secondary,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: TextButton(
+                                  onPressed: (){},
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.search_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        ' Search',
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 15,
+                                            color: Colors.white
+                                        ),
                                       )
-                                  ),
-                                  boxShadow: basicShadow
+                                    ],
+                                  )
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  sb80,
+                  ///theTopIntroImageToTheWebsite
+                  SizedBox(
+                    width: 500,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AspectRatio(
+                          aspectRatio: 4/3,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: pRed,
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  filterQuality: FilterQuality.high,
+                                  image: AssetImage(
+                                    constructionImage,
+                                  )
+                              ),
+                              // boxShadow: basicShadow
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          AspectRatio(
+            aspectRatio: 7/3,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              decoration:  const BoxDecoration(
+                color: Colors.white,
+              ),
+              child:  Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  sb100,
+                  ///theTopIntroImageToTheWebsite
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        sbH80,
+                        Stack(
+                          alignment: const Alignment(3, 2),
+                          children: [
+                            Container(
+                              width: 350,
+                              height: 400,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: pRed,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    filterQuality: FilterQuality.high,
+                                    image: AssetImage(
+                                      constructionImage,
+                                    )
                                 ),
+                                // boxShadow: basicShadow
+                              ),
+                            ),
+                            Container(
+                              width: 280,
+                              height: 280,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: pRed,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    filterQuality: FilterQuality.high,
+                                    image: AssetImage(
+                                      constructionImage,
+                                    )
+                                ),
+                                // boxShadow: basicShadow
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
                       ],
-                ),
-                Container(
-                  height: 60,
-                  width: 570,
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.0),
+                    ),
                   ),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(5.0),
+                  ///theTopIntroTextToTheWebsite
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        sbH60,
+                        Text(
+                          'Why Choose Us:',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: 20
+                          ),
                         ),
-
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(5.0),
+                        RichText(
+                         text:  TextSpan(
+                           children: [
+                             TextSpan(
+                               text:  'We strive to give our clients the best through our Large Collection of many ',
+                               style:GoogleFonts.poppins(
+                                   fontSize: 35,
+                                   fontWeight: FontWeight.w400,
+                                   color: Colors.black
+                               ),
+                             ),
+                             TextSpan(
+                               text:  'Quality Properties ',
+                               style:GoogleFonts.poppins(
+                                   fontSize: 35,
+                                   fontWeight: FontWeight.w400,
+                                   color: Theme.of(context).colorScheme.secondary
+                               ),
+                             ),
+                             TextSpan(
+                               text:  'and ',
+                               style:GoogleFonts.poppins(
+                                   fontSize: 35,
+                                   fontWeight: FontWeight.w400,
+                                   color: Colors.black
+                               ),
+                             ),
+                             TextSpan(
+                               text:  'Services',
+                               style:GoogleFonts.poppins(
+                                   fontSize: 35,
+                                   fontWeight: FontWeight.w400,
+                                   color: Theme.of(context).colorScheme.secondary
+                               ),
+                             ),
+                             // TextSpan(
+                             //   text:  'Learn More ... ',
+                             //   style:GoogleFonts.poppins(
+                             //       fontSize: 20,
+                             //       fontWeight: FontWeight.w400,
+                             //       color: Theme.of(context).colorScheme.secondary
+                             //   ),
+                             // ),
+                           ]
+                         ),
                         ),
-
-                      ),
-                      IconButton(
-                          onPressed: (){},
-                          icon: const Icon(
-                          Icons.filter_list_outlined,
-                        color: Colors.black,
-                          )
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: TextButton(
-                            onPressed: (){},
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.search_outlined,
-                                  color: Colors.white,
-                                ),
-                                Text(
-                                  ' Search',
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white
+                        // Text(
+                        //   'All For You',
+                        //   style:GoogleFonts.poppins(
+                        //       fontSize: 35,
+                        //       fontWeight: FontWeight.w400,
+                        //       color: Theme.of(context).colorScheme.secondary
+                        //   ),
+                        // ),
+                        sbH20,
+                        Container(
+                          height: 258,
+                          width: 620,
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade100,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(2.0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8.0)
                                   ),
-                                )
-                              ],
-                            )
+                                  child:ListTile(
+                                leading: CircleAvatar(
+                                  backgroundColor: pRed,
+                                  child: Icon(
+                                    MdiIcons.tools,
+                                  ),
+                                ),
+                                title: RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'Field Experts ',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400
+                                          ),
+                                        ),
+                                      ]
+                                    )
+                                ),
+                                subtitle: RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'Experts in real estate, design, committed to excellence, client satisfaction, and innovative solutions.',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.black,
+                                              fontWeight: FontWeight.w200
+                                          ),
+                                        ),
+                                      ]
+                                    )
+                                ),
+                              )),
+                              sbH5,
+                              Container(
+                                padding: const EdgeInsets.all(2.0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8.0)
+                                  ),
+                                  child:ListTile(
+                                leading: CircleAvatar(
+                                  backgroundColor: pRed,
+                                  child: const Icon(
+                                    Icons.groups_outlined,
+                                  ),
+                                ),
+                                title: RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'LIFELONG CLIENT RELATIONSHIPS ',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400
+                                          ),
+                                        ),
+                                      ]
+                                    )
+                                ),
+                                subtitle: RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'Josmart Investment Company builds lasting relationships with clients through annual appreciation events.',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w200
+                                          ),
+                                        ),
+                                      ]
+                                    )
+                                ),
+                              )),
+                              sbH5,
+                              Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                    color: pRed,
+                                    borderRadius: BorderRadius.circular(8.0)
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TextButton(onPressed: (){}, child: Text(
+                                      'Show All',
+                                      style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w200,
+                                          color: Colors.black
+                                      ),
+                                    )),
+                                    sb2,
+                                    const Icon(Icons.keyboard_arrow_down_sharp,
+                                    color: Colors.black,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
-                )
-              ],
+                ],
+              ),
             ),
-          )
+          ),
+          AspectRatio(
+            aspectRatio: 5/2,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              decoration:   BoxDecoration(
+                color: Colors.grey.shade100,
+              ),
+              child:  Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ///theTopIntroTextToTheWebsite
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        sbH100,
+                        sbH40,
+                        Text(
+                          'About Us',
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: 18
+                          ),
+                        ),
+                        RichText(
+                          text:  TextSpan(
+                              children: [
+                                TextSpan(
+                                 text:  'To achieve the above,\nWe pride ourselves on our',
+                                  style:GoogleFonts.poppins(
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black
+                                  ),
+                                ),
+                                TextSpan(
+                                 text:  '\nCompany Values',
+                                  style:GoogleFonts.poppins(
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.w400,
+                                      color: Theme.of(context).colorScheme.secondary
+                                  ),
+                                ),
+                              ]
+                          ),
+                        ),
+                        sbH20,
+                        SizedBox(
+                          width: 450,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: IconButton(
+                                    onPressed: (){},
+                                    icon:  Icon(
+                                      Icons.phone_outlined,
+                                      color: Theme.of(context).colorScheme.secondary,
+                                    )
+                                ),
+                              ),
+                              sb5,
+                              Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: IconButton(
+                                    onPressed: (){},
+                                    icon: Icon(
+                                      Icons.alternate_email_outlined,
+                                      color: Theme.of(context).colorScheme.secondary,
+                                    )
+                                ),
+                              ),
+                              sb5,
+                              Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: IconButton(
+                                    onPressed: (){},
+                                    icon:  Icon(
+                                      MdiIcons.whatsapp,
+                                      color: Theme.of(context).colorScheme.secondary,
+                                    )
+                                ),
+                              ),
+                              sb5,
+                              Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: IconButton(
+                                    onPressed: (){},
+                                    icon: Icon(
+                                      Icons.share_outlined,
+                                      color: Theme.of(context).colorScheme.secondary,
+                                    )
+                                ),
+                              ),
+                              sb5,
+                              Container(
+                                padding: const EdgeInsets.all(9.0),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: TextButton(
+                                    onPressed: (){},
+                                    child: Row(
+                                      children: [
+                                         Icon(
+                                          MdiIcons.scriptTextOutline,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          ' About Us',
+                                          style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 15,
+                                              color: Colors.white
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  sb80,
+                  ///theTopIntroImageToTheWebsite
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: pRed,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    filterQuality: FilterQuality.high,
+                                    image: AssetImage(
+                                      dpImage,
+                                    )
+                                ),
+                                // boxShadow: basicShadow
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

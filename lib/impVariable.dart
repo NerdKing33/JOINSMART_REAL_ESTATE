@@ -13,11 +13,13 @@ FontWeight wBold = FontWeight.bold;
 FontWeight wNrml = FontWeight.normal;
 
 String jeLogo = 'lib/images/jeLogo.jpg';
+String dpImage = 'lib/images/dp.jpg';
 String constructionImage = 'lib/images/constructionImage.png';
 String title = 'Joinsmart Estates';
 String titleCptl = 'JOINSMART ESTATES ';
 
 SizedBox sb0 = const SizedBox(width: 0);
+SizedBox sb2 = const SizedBox(width: 2);
 SizedBox sb5 = const SizedBox(width: 5);
 SizedBox sb10 = const SizedBox(width: 10,);
 SizedBox sb15 = const SizedBox(width: 15,);
@@ -39,6 +41,7 @@ SizedBox sb90 = const SizedBox(width: 90,);
 SizedBox sb95 = const SizedBox(width: 95,);
 SizedBox sb100 = const SizedBox(width: 100,);
 
+SizedBox sbH2 = const SizedBox(height: 2);
 SizedBox sbH5 = const SizedBox(height: 5);
 SizedBox sbH8 = const SizedBox(height: 8);
 SizedBox sbH10 = const SizedBox(height: 10,);
