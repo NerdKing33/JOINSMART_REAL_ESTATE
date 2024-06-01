@@ -17,7 +17,9 @@ ThemeData darkMode = ThemeData(
     primary: Colors.grey.shade700,
     secondary: const Color.fromRGBO(214, 0, 5, 1.0),
       tertiary: const Color.fromRGBO(255, 179, 0, 1.0)
-  )
+  ),
+  hoverColor: pRed,
+  hintColor: pRed
 );
 
 Color lRed = const Color.fromRGBO(216,66, 73, 1.0);

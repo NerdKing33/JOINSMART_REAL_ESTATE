@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:housing_information_website/impVariable.dart';
 import 'package:housing_information_website/pages/homePage.dart';
+import 'package:housing_information_website/pages/navigationPage.dart';
 import 'package:housing_information_website/pages/propertiesPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
 
@@ -20,10 +21,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _index = 0;
-  List< Widget > pages = [
-    const homePage(),
-  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,7 +32,7 @@ class _MyAppState extends State<MyApp> {
       theme: lightMode,
       darkTheme: darkMode,
       debugShowCheckedModeBanner: false,
-      home: propertiesPage(),
+      home:  navigationPage(),
     );
   }
 }
