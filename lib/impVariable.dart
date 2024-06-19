@@ -15,8 +15,28 @@ FontWeight wNrml = FontWeight.normal;
 String jeLogo = 'lib/images/jeLogo.jpg';
 String dpImage = 'lib/images/dp.jpg';
 String constructionImage = 'lib/images/constructionImage.png';
+String buildingEquipment = 'lib/images/buildingEquipment.jpg';
+String hotel = 'lib/images/hotel.jpg';
+String landscapeCity = 'lib/images/landscapeCity.jpg';
+String buildings = 'lib/images/buildings.jpg';
+String illustrationImage = 'lib/images/illustrationImage.png';
+String prpty3 = 'lib/images/prpty3.jpg';
+String prpty4 = 'lib/images/prpty4.jpg';
+String prpty2 = 'lib/images/prpty2.jpg';
+String prpty1 = 'lib/images/prpty1.jpg';
+String lndScp = 'lib/images/lndScp.jpg';
+String hs2 = 'lib/images/hs2.jpg';
+String hs3 = 'lib/images/hs3.jpg';
+String hs4 = 'lib/images/hs4.jpg';
+String hs5 = 'lib/images/hs5.jpg';
+
+
+
 String title = 'Joinsmart Estates';
+String userName = 'KWAME PETER MUSHI';
 String titleCptl = 'JOINSMART ESTATES ';
+int navIndex =0;
+
 
 SizedBox sb0 = const SizedBox(width: 0);
 SizedBox sb2 = const SizedBox(width: 2);
@@ -89,3 +109,4 @@ List<BoxShadow> basicShadow = [
       spreadRadius: 1.0
   )
 ];
+

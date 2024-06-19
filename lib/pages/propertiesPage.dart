@@ -19,19 +19,11 @@ class _propertiesPageState extends State<propertiesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const pageHeader(
-          title: 'Our Properties',
-        ),
-        centerTitle: true,
-      ),
       body: ListView(
-        children: [
-          postStrip(stripBackGColor: Colors.grey.shade200, stripTitle: 'Featured Properties', stripTitleColor: Colors.black,),
-          postStrip(stripBackGColor: pRed, stripTitle: 'Hot Products', stripTitleColor: Colors.white,),
-          postStrip(stripBackGColor: Colors.grey.shade200, stripTitle: 'New Products', stripTitleColor: Colors.black,)
+        children:  [
+          const postStrip(stripBackGColor: Colors.white, stripTitle: 'Featured Properties', stripTitleColor: Colors.black,),
+          postStrip(stripBackGColor: Colors.grey.shade100, stripTitle: 'Popular Properties', stripTitleColor: Colors.black,),
+          const postStrip(stripBackGColor: Colors.white, stripTitle: 'Hot Properties', stripTitleColor: Colors.black,),
         ],
       ),
     );

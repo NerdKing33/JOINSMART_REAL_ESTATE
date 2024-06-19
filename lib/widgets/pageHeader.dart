@@ -5,7 +5,22 @@ import '../impVariable.dart';
 
 class pageHeader extends StatefulWidget {
   final String title;
-  const pageHeader({super.key, required this.title});
+  final  double fontSize;
+  final  double height;
+  final  double width;
+  final MainAxisAlignment mainAxisAlignment;
+  final FontWeight fontWeight;
+  final Widget? widget;
+  const pageHeader({
+    super.key,
+    required this.title,
+    required this.fontSize,
+    required this.mainAxisAlignment,
+    required this.fontWeight,
+    required this.height,
+    required this.width,
+    this.widget,
+  });
 
   @override
   State<pageHeader> createState() => _pageHeaderState();
@@ -15,25 +30,31 @@ class _pageHeaderState extends State<pageHeader> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: widget.mainAxisAlignment,
       children: [
-        Container(
-          width: 60,
-          height: 5,
+        widget.widget ?? Container(
+          width: widget.width,
+          height: widget.height,
           decoration:  BoxDecoration(
             borderRadius: const BorderRadius.horizontal(right: Radius.circular(10.0)),
             color: Theme.of(context).colorScheme.secondary,
           ),
         ),
-        sb5,
-        Text(
-          widget.title,
-          style: GoogleFonts.poppins(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.secondary,
-              fontSize: 18
-          ),
-        )
+        widget.width == 0 ? sb0:sb5,
+        RichText(
+            text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: widget.title,
+                    style: GoogleFonts.poppins(
+                      fontWeight: widget.fontWeight,
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: widget.fontSize,
+                    ),
+                  )
+                ]
+            )
+        ),
       ],
     );
   }

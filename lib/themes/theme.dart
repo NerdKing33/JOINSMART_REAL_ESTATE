@@ -5,7 +5,7 @@ ThemeData lightMode = ThemeData(
   colorScheme: ColorScheme.light(
     surface: Colors.grey.shade400,
     primary: Colors.white,
-    secondary: const Color.fromRGBO(214, 0, 5, 1.0),
+    secondary: const Color.fromRGBO(216,66, 73, 1.0),
     tertiary: const Color.fromRGBO(255, 179, 0, 1.0),
   )
 );
@@ -15,7 +15,7 @@ ThemeData darkMode = ThemeData(
   colorScheme: ColorScheme.dark(
     surface: Colors.grey.shade900,
     primary: Colors.grey.shade700,
-    secondary: const Color.fromRGBO(214, 0, 5, 1.0),
+    secondary: const Color.fromRGBO(216,66, 73, 1.0),
       tertiary: const Color.fromRGBO(255, 179, 0, 1.0)
   ),
   hoverColor: pRed,
