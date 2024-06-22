@@ -26,8 +26,11 @@ class servicesPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: serviceCard2(
                 title: 'Real Estate Agency',
-                description:
-                'Our real estate company expertly handles letting, leasing, buying, and selling properties. We provide up-to-date market insights and attract reliable tenants, ensuring consistent rental payments. Experience seamless and rewarding real estate transactions with us.',
+                description: 'Our real estate company expertly handles letting, '
+                    'leasing, buying, and selling properties. '
+                    'We provide up-to-date market insights and attract reliable tenants, '
+                    'ensuring consistent rental payments. Experience seamless and '
+                    'rewarding real estate transactions with us.',
                 imagePath: constructionImage, // Add your image
               ),
           );

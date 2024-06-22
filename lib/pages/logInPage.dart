@@ -60,37 +60,6 @@ class _logInPageState extends State<logInPage> {
                                   ]
                               )
                           ),
-                          // sbH10,
-                          // sbH20,
-                          // Container(
-                          //   padding: const EdgeInsets.all(8.0),
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.transparent,
-                          //     borderRadius: BorderRadius.circular(8.0),
-                          //     border: Border.all(
-                          //       color: lRed,
-                          //       width: .5,
-                          //     )
-                          //   ),
-                          //   child: TextFormField(
-                          //     decoration:  InputDecoration(
-                          //         labelText: 'Full Name',
-                          //         labelStyle: GoogleFonts.poppins(
-                          //             color: Colors.grey[800],
-                          //             fontSize: 14,
-                          //             wordSpacing: 1.5,
-                          //             fontWeight: FontWeight.w400
-                          //         ),
-                          //       border: InputBorder.none
-                          //     ),
-                          //     validator: (value) {
-                          //       if (value!.isEmpty) {
-                          //         return 'Please enter your full name';
-                          //       }
-                          //       return null;
-                          //     },
-                          //   ),
-                          // ),
                           sbH20,
                           Container(
                             padding: const EdgeInsets.all(8.0),
@@ -121,7 +90,7 @@ class _logInPageState extends State<logInPage> {
                               },
                             ),
                           ),
-                          sbH20,
+                          sbH15,
                           Container(
                             padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
@@ -255,8 +224,8 @@ class _logInPageState extends State<logInPage> {
               ),
               sb30,
               Container(
-                width: 500,
-                height: 600,
+                width:MediaQuery.of(context).size.width < 1300 ? 400 : 500,
+                height: MediaQuery.of(context).size.width < 1300 ?  500 : 600,
                 decoration: BoxDecoration(
                   image: DecorationImage(image: AssetImage(illustrationImage)),
                 ),

@@ -89,6 +89,32 @@ class _navigationPageState extends State<navigationPage> {
                         ],
                       )
                   ),
+                  navIndex == 7 ? Container(
+                    padding: const EdgeInsets.all(3.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.0),
+                        color: lRed,
+                        border: Border.all(
+                          color: lRed,
+                          width: .5,
+                        )
+                    ),
+                    child: IconButton(
+                        onPressed: (){
+                          setState(() {
+                            navIndex = 6;
+                          });
+                        },
+                        icon:Text(
+                          'Sign Up',
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1.2,
+                          ),
+                        )
+                    ),
+                  ):
                   Container(
                     padding: const EdgeInsets.all(3.0),
                     decoration: BoxDecoration(
@@ -115,7 +141,6 @@ class _navigationPageState extends State<navigationPage> {
                         )
                     ),
                   ),
-
                 ]
                   :[
                     ///theUpperLeftChatter

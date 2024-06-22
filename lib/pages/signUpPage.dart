@@ -38,7 +38,7 @@ class _signUpPageState extends State<signUpPage> {
                     children: <Widget>[
                      sbH20,
                       SizedBox(
-                        width: 480,
+                        width: 460,
                         child: RichText(
                             text:  TextSpan(
                                 children: [
@@ -46,7 +46,7 @@ class _signUpPageState extends State<signUpPage> {
                                     text: 'Create New Account \n',
                                     style: GoogleFonts.poppins(
                                         fontSize: 40,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                         color: lRed
                                     ),
                                   ),
@@ -61,38 +61,37 @@ class _signUpPageState extends State<signUpPage> {
                         )
                         ),
                       ),
-                      // sbH10,
-                      // sbH20,
-                      // Container(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.transparent,
-                      //     borderRadius: BorderRadius.circular(8.0),
-                      //     border: Border.all(
-                      //       color: lRed,
-                      //       width: .5,
-                      //     )
-                      //   ),
-                      //   child: TextFormField(
-                      //     decoration:  InputDecoration(
-                      //         labelText: 'Full Name',
-                      //         labelStyle: GoogleFonts.poppins(
-                      //             color: Colors.grey[800],
-                      //             fontSize: 14,
-                      //             wordSpacing: 1.5,
-                      //             fontWeight: FontWeight.w400
-                      //         ),
-                      //       border: InputBorder.none
-                      //     ),
-                      //     validator: (value) {
-                      //       if (value!.isEmpty) {
-                      //         return 'Please enter your full name';
-                      //       }
-                      //       return null;
-                      //     },
-                      //   ),
-                      // ),
-                      sbH20,
+                      sbH15,
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(8.0),
+                          border: Border.all(
+                            color: lRed,
+                            width: .5,
+                          )
+                        ),
+                        child: TextFormField(
+                          decoration:  InputDecoration(
+                              labelText: 'Full Name',
+                              labelStyle: GoogleFonts.poppins(
+                                  color: Colors.grey[800],
+                                  fontSize: 14,
+                                  wordSpacing: 1.5,
+                                  fontWeight: FontWeight.w400
+                              ),
+                            border: InputBorder.none
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your full name';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      sbH15,
                       Container(
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
@@ -122,7 +121,7 @@ class _signUpPageState extends State<signUpPage> {
                           },
                         ),
                       ),
-                    sbH20,
+                    sbH15,
                       Container(
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
@@ -154,37 +153,36 @@ class _signUpPageState extends State<signUpPage> {
                         ),
                       ),
                       sbH20,
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(8.0),
-                            border: Border.all(
-                              color: lRed,
-                              width: .5,
-                            )
-                        ),
-                        child: TextFormField(
-                          decoration:  InputDecoration(
-                            labelText: 'Confirm Password',
-                              labelStyle: GoogleFonts.poppins(
-                                  color: Colors.grey[800],
-                                  fontSize: 14,
-                                  wordSpacing: 1.5,
-                                  fontWeight: FontWeight.w400
-                              ),
-                            border: InputBorder.none
-                          ),
-                          obscureText: true,
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 8) {
-                              return 'Please enter a password with at least 8 characters';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      sbH20,
+                      // Container(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   decoration: BoxDecoration(
+                      //       color: Colors.transparent,
+                      //       borderRadius: BorderRadius.circular(8.0),
+                      //       border: Border.all(
+                      //         color: lRed,
+                      //         width: .5,
+                      //       )
+                      //   ),
+                      //   child: TextFormField(
+                      //     decoration:  InputDecoration(
+                      //       labelText: 'Confirm Password',
+                      //         labelStyle: GoogleFonts.poppins(
+                      //             color: Colors.grey[800],
+                      //             fontSize: 14,
+                      //             wordSpacing: 1.5,
+                      //             fontWeight: FontWeight.w400
+                      //         ),
+                      //       border: InputBorder.none
+                      //     ),
+                      //     obscureText: true,
+                      //     validator: (value) {
+                      //       if (value!.isEmpty || value.length < 8) {
+                      //         return 'Please enter a password with at least 8 characters';
+                      //       }
+                      //       return null;
+                      //     },
+                      //   ),
+                      // ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -291,8 +289,8 @@ class _signUpPageState extends State<signUpPage> {
             ),
             sb50,
             Container(
-              width: 700,
-              height: 700,
+              width:MediaQuery.of(context).size.width < 1300 ? 400 : 500,
+              height: MediaQuery.of(context).size.width < 1300 ?  500 : 600,
               decoration: BoxDecoration(
                 image: DecorationImage(image: AssetImage(illustrationImage)),
               ),
