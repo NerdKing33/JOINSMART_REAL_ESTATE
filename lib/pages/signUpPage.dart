@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/impVariable.dart';
+import 'package:housing_information_website/pages/navigationPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:page_transition/page_transition.dart';
+
+import '../resources/auth.dart';
+import '../utils.dart';
 
 
 class signUpPage extends StatefulWidget {
@@ -11,6 +17,63 @@ class signUpPage extends StatefulWidget {
 
 class _signUpPageState extends State<signUpPage> {
   final _formKey = GlobalKey<FormState>();
+  ImageSource? _profilePic ;
+  bool isLoading = false;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    emailController.dispose();
+    phoneNumberController.dispose();
+    passwordController.dispose();
+  }
+
+  void selectImage() async {
+    ImageSource dpImage = await pickImage(
+      ImageSource.gallery,
+    );
+    setState(() {
+      _profilePic = dpImage;
+    });
+  }
+
+  void signUpUser() async {
+    setState(() {
+      isLoading = true;
+    });
+    String res = await AuthMethods().signUpUser(
+      username: nameController.text,
+      password: passwordController.text,
+      userEmail: emailController.text,
+      userNumber: phoneNumberController.text,
+      profilePic: null ,
+    );
+
+    if (res != 'success') {
+      setState(() {
+        isLoading = false;
+      });
+      showSnackBar(res, context);
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+      setState(() {
+        navIndex = 0;
+        Navigator.of(context).pushReplacement(PageTransition(
+          type: PageTransitionType.bottomToTop,
+          duration: const Duration(milliseconds: 300),
+          child:  navigationPage(),
+        ));
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +136,7 @@ class _signUpPageState extends State<signUpPage> {
                           )
                         ),
                         child: TextFormField(
+                          controller: nameController,
                           decoration:  InputDecoration(
                               labelText: 'Full Name',
                               labelStyle: GoogleFonts.poppins(
@@ -103,6 +167,7 @@ class _signUpPageState extends State<signUpPage> {
                             )
                         ),
                         child: TextFormField(
+                          controller: emailController,
                           decoration:  InputDecoration(
                             labelText: 'Email',
                               labelStyle: GoogleFonts.poppins(
@@ -133,6 +198,7 @@ class _signUpPageState extends State<signUpPage> {
                             )
                         ),
                         child: TextFormField(
+                          controller: passwordController,
                           decoration: InputDecoration(
                             labelText: 'Password',
                               labelStyle: GoogleFonts.poppins(

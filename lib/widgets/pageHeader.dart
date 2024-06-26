@@ -11,6 +11,7 @@ class pageHeader extends StatefulWidget {
   final MainAxisAlignment mainAxisAlignment;
   final FontWeight fontWeight;
   final Widget? widget;
+  final Color? color;
   const pageHeader({
     super.key,
     required this.title,
@@ -20,6 +21,7 @@ class pageHeader extends StatefulWidget {
     required this.height,
     required this.width,
     this.widget,
+    this.color,
   });
 
   @override
@@ -48,7 +50,7 @@ class _pageHeaderState extends State<pageHeader> {
                     text: widget.title,
                     style: GoogleFonts.poppins(
                       fontWeight: widget.fontWeight,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: widget.color ??Theme.of(context).colorScheme.secondary,
                       fontSize: widget.fontSize,
                     ),
                   )

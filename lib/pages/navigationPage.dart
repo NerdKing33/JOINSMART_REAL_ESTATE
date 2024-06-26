@@ -4,6 +4,7 @@ import 'package:housing_information_website/pages/aboutPage.dart';
 import 'package:housing_information_website/pages/accountPage.dart';
 import 'package:housing_information_website/pages/homePage.dart';
 import 'package:housing_information_website/pages/logInPage.dart';
+import 'package:housing_information_website/pages/postPage.dart';
 import 'package:housing_information_website/pages/propertiesPage.dart';
 import 'package:housing_information_website/pages/servicesPage.dart';
 import 'package:housing_information_website/pages/signUpPage.dart';
@@ -13,6 +14,7 @@ import '../impVariable.dart';
 import '../themes/theme.dart';
 
 class navigationPage extends StatefulWidget {
+
    navigationPage({super.key});
 
   @override
@@ -23,6 +25,7 @@ class _navigationPageState extends State<navigationPage> {
   late final  bool _loggedIn = false;
 
    final List<Widget> _pages = [
+     const postPage(postId: '7cNOElwf9LcFbBubuUOh',),
      const homePage(),
      const propertiesPage(),
      const servicesPage(),
@@ -36,7 +39,6 @@ class _navigationPageState extends State<navigationPage> {
   @override
   Widget build(BuildContext context) {
     Color selectedColor = Theme.of(context).colorScheme.secondary;
-    Color unselectedColor = Theme.of(context).colorScheme.surface;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: navIndex >= 6  ? Colors.white : Colors.white,
@@ -66,7 +68,7 @@ class _navigationPageState extends State<navigationPage> {
                                   color: selectedColor,
                                   width: 1.0
                               ),
-                              borderRadius: BorderRadius.circular(100.0),
+                              shape: BoxShape.circle,
                               color: Colors.transparent,
                             ),
                             child: CircleAvatar(
@@ -92,7 +94,7 @@ class _navigationPageState extends State<navigationPage> {
                   navIndex == 7 ? Container(
                     padding: const EdgeInsets.all(3.0),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: BorderRadius.circular(10.0),
                         color: lRed,
                         border: Border.all(
                           color: lRed,
@@ -106,7 +108,7 @@ class _navigationPageState extends State<navigationPage> {
                           });
                         },
                         icon:Text(
-                          'Sign Up',
+                          'SIGN UP',
                           style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
@@ -118,7 +120,7 @@ class _navigationPageState extends State<navigationPage> {
                   Container(
                     padding: const EdgeInsets.all(3.0),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: BorderRadius.circular(10.0),
                         color: lRed,
                         border: Border.all(
                           color: lRed,
@@ -161,7 +163,7 @@ class _navigationPageState extends State<navigationPage> {
                                       color: selectedColor,
                                       width: 1.0
                                   ),
-                                  borderRadius: BorderRadius.circular(100.0),
+                                 shape: BoxShape.circle,
                                   color: Colors.transparent,
                                 ),
                                 child: CircleAvatar(
@@ -191,7 +193,7 @@ class _navigationPageState extends State<navigationPage> {
                       child: Container(
                         padding: const EdgeInsets.all(5.0),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.0),
+                          borderRadius: BorderRadius.circular(15.0),
                           color: Colors.white,
                           border: Border.all(
                             color: lRed,
@@ -203,7 +205,7 @@ class _navigationPageState extends State<navigationPage> {
                             Container(
                               padding: const EdgeInsets.all(.0),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.0),
+                                borderRadius: BorderRadius.circular(10.0),
                                 color: navIndex == 0 ?pRed : Colors.white,
                               ),
                               child: TextButton(
@@ -225,7 +227,7 @@ class _navigationPageState extends State<navigationPage> {
                             Container(
                               padding: const EdgeInsets.all(.0),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.0),
+                                borderRadius: BorderRadius.circular(10.0),
                                 color: navIndex == 1 ?pRed : Colors.white,
                               ),
                               child: TextButton(
@@ -247,7 +249,7 @@ class _navigationPageState extends State<navigationPage> {
                             Container(
                               padding: const EdgeInsets.all(.0),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.0),
+                                borderRadius: BorderRadius.circular(10.0),
                                 color: navIndex == 2 ?pRed : Colors.white,
                               ),
                               child: TextButton(
@@ -269,7 +271,7 @@ class _navigationPageState extends State<navigationPage> {
                             Container(
                               padding: const EdgeInsets.all(.0),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.0),
+                                borderRadius: BorderRadius.circular(10.0),
                                 color: navIndex == 3 ?pRed : Colors.white,
                               ),
                               child: TextButton(
@@ -301,7 +303,7 @@ class _navigationPageState extends State<navigationPage> {
                           Container(
                             padding: const EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.0),
+                                borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.white,
                                 border: Border.all(
                                   color: lRed,
@@ -338,7 +340,7 @@ class _navigationPageState extends State<navigationPage> {
                           Container(
                             padding: const EdgeInsets.all(5.0),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.0),
+                                borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.white,
                                 border: Border.all(
                                   color: lRed,
@@ -361,7 +363,7 @@ class _navigationPageState extends State<navigationPage> {
                           Container(
                             padding: const EdgeInsets.all(5.0),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.0),
+                                borderRadius: BorderRadius.circular(10.0),
                                 color: lRed,
                                 border: Border.all(
                                   color: lRed,

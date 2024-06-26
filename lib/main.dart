@@ -15,19 +15,24 @@ import 'package:housing_information_website/pages/signUpPage.dart';
 import 'package:housing_information_website/pages/uploadPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
+  // if(kIsWeb) {
+  //   await Firebase.initializeApp(
+  //     options: const FirebaseOptions(
+  //         apiKey: "AIzaSyD-8y-5awQXBxqxcevTRq5MIaF4rjYG_aw",
+  //         appId: "1:999658565706:web:003e212c086dc62da9b6b3",
+  //         messagingSenderId: "999658565706",
+  //         projectId: "joinsmart-estates",
+  //       storageBucket: "joinsmart-estates.appspot.com",
+  //     )
+  //   );
+  // }else{}
   WidgetsFlutterBinding.ensureInitialized();
-  if(kIsWeb) {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-          apiKey: "AIzaSyD-8y-5awQXBxqxcevTRq5MIaF4rjYG_aw",
-          appId: "1:999658565706:web:003e212c086dc62da9b6b3",
-          messagingSenderId: "999658565706",
-          projectId: "joinsmart-estates",
-        storageBucket: "joinsmart-estates.appspot.com",
-      )
-    );
-  }else{}
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
       const MyApp()
   );

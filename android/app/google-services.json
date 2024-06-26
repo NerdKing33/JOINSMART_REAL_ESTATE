@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "46942427883",
+    "project_id": "jisestates",
+    "storage_bucket": "jisestates.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46942427883:android:b28dc85192fa6ca74afcae",
+        "android_client_info": {
+          "package_name": "com.pj.tmk.nkog.housing_information_website"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIuYejvMdVgHb12f7vhoAQ8OV-a1Rk4GE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
