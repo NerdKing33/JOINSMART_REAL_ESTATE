@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/impVariable.dart';
+import 'package:housing_information_website/themes/theme.dart';
 import 'package:housing_information_website/widgets/pageHeader.dart';
 
 import '../widgets/serviceCard1.dart';
@@ -55,44 +56,6 @@ class aboutPage extends StatelessWidget {
                     )
                 ),
                 sbH20,sbH2,sbH2,
-                // Services Section
-                const pageHeader(
-                  title: 'Services ',
-                  fontSize: 40,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  fontWeight: FontWeight.w500,
-                  height: .0,
-                  width: .0,
-                ),
-                sbH2,sbH2,sbH2,sbH10,
-                GridView.count(
-                  crossAxisCount: 2,
-                  childAspectRatio: 4/2.8,
-                  shrinkWrap: true,
-                  children: [
-                    serviceCard1(
-                      icon: Icons.real_estate_agent_outlined,
-                      title: "Real Estate Service",
-                      description: "At JIC, we bring professional expertise to every aspect of community association management and related real estate services. Trust our industry-leading experience to handle your property management needs with excellence",
-                    ),
-                    serviceCard1(
-                      icon: Icons.house_outlined,
-                      title: "House Ownership",
-                      description: "At JIC, we ensure quality housing ownership services tailored to your needs. Leveraging our professional experience, we not only serve but also provide expert consulting to guide you every step of the way.",
-                    ),
-                    serviceCard1(
-                      icon: Icons.location_on_outlined,
-                      title: "Land Ownership",
-                      description: "At JIC, we understand that land ownership is crucial for community development. We ensure our clients secure the best properties by strictly adhering to local land tenure laws and regulations. Trust us to guide you through the process with expertise and integrity.",
-                    ),
-                    serviceCard1(
-                      icon: Icons.build_outlined,
-                      title: "Construction",
-                      description: "Explore our gallery featuring ongoing building projects and homes under construction, highlighting our commitment to meticulous craftsmanship and attention to detail. Join us in creating exceptional spaces where dreams become reality.",
-                    ),
-                  ],
-                ),
-                sbH2,sbH2,sbH2,sbH2,sbH20,
                 // Mission and Vision Section
                 Text(
                   "Our Mission",
@@ -234,6 +197,25 @@ class aboutPage extends StatelessWidget {
                   ],
                 ),
                 sbH2,sbH2,sbH2,sbH2,sbH20,
+                const pageHeader(title: 'Our Founder', fontSize: 30, mainAxisAlignment: MainAxisAlignment.center, fontWeight: FontWeight.w600, height: 5, width: 60),
+                sbH20,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 500,
+                      height: 500,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: pRed,
+                        image: DecorationImage(
+                            image: AssetImage(dpImage),
+                          fit: BoxFit.cover,
+                        )
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
           ),

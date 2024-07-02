@@ -13,6 +13,70 @@ class homePgStrip3 extends StatefulWidget {
 }
 
 class _homePgStrip3State extends State<homePgStrip3> {
+  infoCard( String title, String info ){
+    return showDialog(context: context, builder: (context){
+      return  AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+        backgroundColor: pRed,
+        title: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: title,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w500,
+                    color: lRed,
+                    letterSpacing: 1.5,
+                    wordSpacing: 2,
+                    fontSize: 30
+                ),
+              )
+            ]
+          ),
+        ),
+        content:  RichText(
+          text: TextSpan(
+              children: [
+                TextSpan(
+                  text: info,
+                  style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 1.5,
+                      wordSpacing: 2,
+                      fontSize: 24
+                  ),
+                )
+              ]
+          ),
+        ),
+        actions: [
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: lRed,
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: IconButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+                icon: Text(
+                  'CLOSE',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18
+                  ),
+                )
+            ),
+          )
+        ],
+      );
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -74,174 +138,175 @@ class _homePgStrip3State extends State<homePgStrip3> {
                     ]
                 ),
               ),
+              RichText(
+                text:  TextSpan(
+                    children: [
+                      TextSpan(
+                        text:  'Select below the desirable way to contact us\nor share our platform.',
+                        style:GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey[800]
+                        ),
+                      ),
+                    ]
+                ),
+              ),
               sbH20,
               SizedBox(
                 width: 480,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: basicShadow
-                        ),
-                        child: IconButton(
-                            onPressed: (){},
-                            icon:  Icon(
-                              Icons.phone_outlined,
-                              color: Theme.of(context).colorScheme.secondary,
-                            )
-                        ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: basicShadow
+                      ),
+                      child: IconButton(
+                          hoverColor: pRed,
+                          highlightColor: lRed,
+                          onPressed: (){ infoCard(
+                            'Our Contact Information',
+                              '+255 743 522 226'
+                          );},
+                          icon:  Icon(
+                            Icons.phone_outlined,
+                            color: Theme.of(context).colorScheme.secondary,
+                          )
                       ),
                     ),
                     sb5,sb2,
-                    GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: basicShadow
-                        ),
-                        child: IconButton(
-                            onPressed: (){},
-                            icon:  Icon(
-                              MdiIcons.emailOutline,
-                              color: Theme.of(context).colorScheme.secondary,
-                            )
-                        ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: basicShadow
+                      ),
+                      child: IconButton(
+                          hoverColor: pRed,
+                          highlightColor: lRed,
+                          onPressed: (){infoCard(
+                            'Our Email Handle:',
+                              'josmartrealestateteam@gmail.com'
+                          );},
+                          icon:  Icon(
+                            MdiIcons.emailOutline,
+                            color: Theme.of(context).colorScheme.secondary,
+                          )
                       ),
                     ),
                     sb5,sb2,
-                    GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: basicShadow
-                        ),
-                        child: IconButton(
-                            onPressed: (){},
-                            icon:  Icon(
-                              Icons.facebook_outlined,
-                              color: Theme.of(context).colorScheme.secondary,
-                            )
-                        ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: basicShadow
+                      ),
+                      child: IconButton(
+                        hoverColor: pRed,
+                          highlightColor: lRed,
+                          onPressed: (){
+                          infoCard(
+                      'Our Facebook Handle:',
+                           '',
+                      );
+                        },
+                          icon:  Icon(
+                            Icons.facebook_outlined,
+                            color: Theme.of(context).colorScheme.secondary,
+                          )
                       ),
                     ),
                     sb5,sb2,
-                    GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: basicShadow
-                        ),
-                        child: IconButton(
-                            onPressed: (){},
-                            icon: Icon(
-                              MdiIcons.instagram,
-                              color: Theme.of(context).colorScheme.secondary,
-                            )
-                        ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: basicShadow
+                      ),
+                      child: IconButton(
+                          hoverColor: pRed,
+                          highlightColor: lRed,
+                          onPressed: (){infoCard(
+                            'Our Instagram Handle',
+                              'josmart_real_estate_team'
+                          );
+                            },
+                          icon: Icon(
+                            MdiIcons.instagram,
+                            color: Theme.of(context).colorScheme.secondary,
+                          )
                       ),
                     ),
                     sb5,sb2,
-                    GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: basicShadow
-                        ),
-                        child: IconButton(
-                            onPressed: (){},
-                            icon:  Icon(
-                              MdiIcons.whatsapp,
-                              color: Theme.of(context).colorScheme.secondary,
-                            )
-                        ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: basicShadow
+                      ),
+                      child: IconButton(
+                          hoverColor: pRed,
+                          highlightColor: lRed,
+                          onPressed: (){infoCard(
+                            'Our Whatsapp Contact Information',
+                              '+255 743 522 226'
+                          );
+                            },
+                          icon:  Icon(
+                            MdiIcons.whatsapp,
+                            color: Theme.of(context).colorScheme.secondary,
+                          )
                       ),
                     ),
                     sb5,sb2,
-                    GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: basicShadow
-                        ),
-                        child: IconButton(
-                            onPressed: (){},
-                            icon: Icon(
-                              Icons.share_outlined,
-                              color: Theme.of(context).colorScheme.secondary,
-                            )
-                        ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: basicShadow
+                      ),
+                      child: IconButton(
+                          hoverColor: pRed,
+                          highlightColor: lRed,
+                          onPressed: (){
+                            infoCard(
+                              'Our Offices Location:',
+                                'Mlimani City-Near Lufungila Bus station'
+                            );
+                          },
+                          icon: Icon(
+                            Icons.location_on_outlined,
+                            color: Theme.of(context).colorScheme.secondary,
+                          )
                       ),
                     ),
                     sb5,sb2,
-                    GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                            boxShadow: basicShadow
-                        ),
-                        child: IconButton(
-                            onPressed: (){},
-                            icon: Icon(
-                              Icons.location_on_outlined,
-                              color: Theme.of(context).colorScheme.secondary,
-                            )
-                        ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: basicShadow
+                      ),
+                      child: IconButton(
+                          hoverColor: pRed,
+                          highlightColor: lRed,
+                          onPressed: (){},
+                          icon: Icon(
+                            Icons.share_outlined,
+                            color: Theme.of(context).colorScheme.secondary,
+                          )
                       ),
                     ),
-                    // GestureDetector(
-                    //   onTap: (){},
-                    //   child: Container(
-                    //     padding: const EdgeInsets.symmetric(vertical: 14.0),
-                    //     decoration: BoxDecoration(
-                    //         color: Theme.of(context).colorScheme.secondary,
-                    //         borderRadius: BorderRadius.circular(8.0),
-                    //         boxShadow: basicShadow
-                    //     ),
-                    //     child: TextButton(
-                    //         onPressed: (){},
-                    //         child: Row(
-                    //           children: [
-                    //             Icon(
-                    //               MdiIcons.helpCircleOutline,
-                    //               color: Colors.white,
-                    //             ),
-                    //             Text(
-                    //               ' Help',
-                    //               style: GoogleFonts.poppins(
-                    //                   fontWeight: FontWeight.w400,
-                    //                   fontSize: 15,
-                    //                   color: Colors.white
-                    //               ),
-                    //             )
-                    //           ],
-                    //         )
-                    //     ),
-                    //   ),
-                    // )
                   ],
                 ),
               ),
@@ -254,7 +319,7 @@ class _homePgStrip3State extends State<homePgStrip3> {
               height: 400,
               width: 400,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(20.0),
                   color: pRed,
                   image: DecorationImage(
                       fit: BoxFit.cover,

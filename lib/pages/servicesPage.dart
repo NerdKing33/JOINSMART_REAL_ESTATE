@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/widgets/pageHeader.dart';
@@ -16,10 +17,10 @@ class servicesPage extends StatelessWidget {
       ),
       backgroundColor: Colors.white, 
       body: GridView.builder(
-        itemCount: 03,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+        itemCount: 6,
+        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 4/2.8,
+          crossAxisCount: MediaQuery.of(context).size.width >= 1300 ? 3:2,
         ),
         itemBuilder: (context, index) {
           return Padding(

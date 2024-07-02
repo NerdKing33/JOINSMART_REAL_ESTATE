@@ -49,5 +49,12 @@
     <string>This app needs access to your camera in order to take pictures.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>This app needs access to your photo library in order to select pictures.</string>
+    <string>Main</NSLocationWhenInUseUsageDescription>
+    	<key>Want To Display Location On Map And Track It</key>
 </dict>
 </plist>
+<string>Main</NSLocationWhenInUseUsageDescription>
+    	<key>Want To Display Location On Map And Track It</key>
+<string>Main</NSLocationAlwaysAndWhenInUseUsageDescription>
+    	<key>Want To Display Location On Map And Track It</key>
+

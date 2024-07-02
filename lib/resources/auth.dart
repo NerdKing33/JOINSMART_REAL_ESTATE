@@ -25,7 +25,7 @@ class AuthMethods {
     required String password,
     required String userEmail,
     required String userNumber,
-    required Uint8List? profilePic,
+    required String userTitle,
   }) async {
     String res = "error";
     try {
@@ -37,25 +37,22 @@ class AuthMethods {
           email: userEmail,
           password: password,
         );
-//storingTheProfilePic
-        String profilePicUrl = await storageMethods().imageUpload(
-          'profilePics',
-          profilePic!,
-          false,
-        );
+
+
         model.userModel theUser = model.userModel(
-            userName: username,
+            username: username,
             userEmail: userEmail,
             uid: id.user!.uid,
-            profilePic: profilePicUrl ?? '',
-            userNumber: userNumber);
+            userNumber: userNumber,
+            userTitle: userTitle
+        );
         await _store
             .collection('Users')
             .doc(id.user!.uid)
             .set(theUser.objMapper());
-        res = 'success';
+        res = 'Success';
       } else {
-        res = 'enter all fields';
+        res = 'Enter All Fields';
       }
     } catch (err) {
       res = err.toString();
@@ -75,9 +72,9 @@ class AuthMethods {
             email: email,
             password: password
         );
-        res = 'success';
+        res = 'Success';
       } else {
-        res = 'enterAllFields';
+        res = 'Enter All Fields';
       }
     } catch (error) {
       res = error.toString();
@@ -89,7 +86,7 @@ class AuthMethods {
     String res = 'error';
     try {
       await _auth.signOut();
-      res = 'success';
+      res = 'Success';
     } catch (err) {
       res = err.toString();
     }
@@ -97,7 +94,7 @@ class AuthMethods {
   }
 
   //userPostUpload
-  Future<String> userPost({
+  Future<String> propertyUpload({
     required  String noRooms,
     required  String noBathrooms,
     required  String noFloors,
@@ -110,9 +107,9 @@ class AuthMethods {
     required  String agentNumber,
     required  String paymentPeriod,
     required String propertyLocation,
-      required List<File> secondaryPosts,
+      required List<Uint8List> secondaryPosts,
       required Uint8List mainPost,
-      required Uint8List postVideo,
+      required String postVideo,
       required GeoPoint mapLocation,
   }) async {
     String res = "error";
@@ -131,7 +128,9 @@ class AuthMethods {
           propertyType.isNotEmpty ||
           paymentPeriod.isNotEmpty ||
           uid.isNotEmpty ||
+          secondaryPosts.isNotEmpty ||
           mainPost.isNotEmpty) {
+
         List<String> mainUrls = [];
         for (int k = 0; k < secondaryPosts.length; k++) {
           mainUrls.add(await storageMethods()
@@ -139,8 +138,7 @@ class AuthMethods {
         }
         String mainUrl =
             await storageMethods().imageUpload('posts', mainPost, true);
-        String videoUrl =
-            await storageMethods().videoUpload('posts', 'videoPost', postVideo);
+
         postModel userPost = postModel(
           noRooms: noRooms,
           noBathrooms: noBathrooms,
@@ -154,7 +152,7 @@ class AuthMethods {
           propertyLocation: propertyLocation,
           mainPost: mainUrl,
           agentNumber: agentNumber,
-          postVideo: videoUrl,
+          postVideo: '',
           mapLocation: mapLocation,
           propertyTitle: propertyTitle,
           propertyType: propertyType,
@@ -162,9 +160,9 @@ class AuthMethods {
           paymentPeriod: paymentPeriod,
         );
         _store.collection('Posts').doc(postUid).set(userPost.detailsMapper());
-        res = 'success';
+        res = 'Success';
       } else {
-        res = 'inputAllFields';
+        res = 'Input All Fields';
       }
     } catch (err) {
       res = err.toString();

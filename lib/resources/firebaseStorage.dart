@@ -33,14 +33,14 @@ class storageMethods {
   Future<String> imageUploads(
     String childName,
     String type,
-    File files,
+    Uint8List images,
   ) async {
     Reference reference =
         _storage.ref().child(childName).child(_authy.currentUser!.uid);
     String id = const Uuid().v1();
     reference = reference.child(type);
     reference = reference.child(id);
-    UploadTask uploadTask = reference.putFile(files);
+    UploadTask uploadTask = reference.putData(images);
     TaskSnapshot snapshot = await uploadTask;
     String downloadUrl = await snapshot.ref.getDownloadURL();
     return downloadUrl;

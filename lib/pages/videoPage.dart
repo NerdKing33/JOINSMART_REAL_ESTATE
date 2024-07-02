@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:housing_information_website/widgets/snackBar.dart';
 import '../utils.dart';
 class videoPage extends StatefulWidget {
   final String postId;
@@ -39,7 +38,7 @@ class _videoPageState extends State<videoPage> {
       images.add(widget.mainPost['mainPost']);
       images.addAll(await userPostData['posts']);
     } catch (err) {
-      snackBar(description: err.toString(),);
+        showSnackBar(err.toString(),context);
     }
   }
 

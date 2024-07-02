@@ -41,7 +41,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                     width: 320,
                     height: 350,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(20.0),
                       color: Colors.white,
                       image: DecorationImage(
                           fit: BoxFit.cover,
@@ -57,7 +57,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                     width: 250,
                     height: 250,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(20.0),
                       color: Colors.white,
                       image: DecorationImage(
                           fit: BoxFit.cover,
@@ -133,7 +133,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: BorderRadius.circular(20.0),
                   // boxShadow: basicShadow,
                 ),
                 child: Column(
@@ -143,7 +143,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                         padding: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(
                           color: pRed,
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                         child:ListTile(
                           leading: CircleAvatar(
@@ -186,7 +186,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                         padding: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(
                             color: pRed,
-                            borderRadius: BorderRadius.circular(8.0)
+                            borderRadius: BorderRadius.circular(15.0)
                         ),
                         child:ListTile(
                           leading: CircleAvatar(
@@ -229,7 +229,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                         padding: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(
                             color: pRed,
-                            borderRadius: BorderRadius.circular(8.0)
+                            borderRadius: BorderRadius.circular(15.0)
                         ),
                         child:ListTile(
                           leading: CircleAvatar(
@@ -269,26 +269,35 @@ class _homePgStrip2State extends State<homePgStrip2> {
                         )),
                     sbH10,
                     Container(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(.0),
                       decoration: BoxDecoration(
                           color: selectedColor,
-                          borderRadius: BorderRadius.circular(8.0)
+                          borderRadius: BorderRadius.circular(15.0)
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(onPressed: (){}, child: Text(
-                            'Show All',
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white
-                            ),
-                          )),
-                          sb2,
-                          const Icon(Icons.keyboard_arrow_down_sharp,
-                            color: Colors.white,
-                          )
-                        ],
+                      child: InkWell(
+                        onTap: (){
+                        Navigator.of(context).pushNamed('/servicesPage');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Show All',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
+                                    fontSize: 18
+                                ),
+                              ),
+                              sb2,
+                              const Icon(Icons.keyboard_arrow_down_sharp,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                     )
                   ],

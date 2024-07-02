@@ -1,12 +1,104 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/impVariable.dart';
 import 'package:housing_information_website/themes/theme.dart';
+import 'package:housing_information_website/widgets/containers/quickAccessContainer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../resources/auth.dart';
+import '../utils.dart';
 import '../widgets/pageHeader.dart';
 
-class accountPage extends StatelessWidget {
+class accountPage extends StatefulWidget {
+
+  const accountPage({
+    super.key,
+  });
+
+  @override
+  State<accountPage> createState() => _accountPageState();
+}
+
+class _accountPageState extends State<accountPage> {
+  var userData = {};
+  @override
+  void initState() {
+    super.initState();
+    addDataPost();
+  }
+
+  cont(){
+    return context;
+  }
+  addDataPost() async {
+    try {
+      var snap = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get();
+      userData = snap.data()!;
+      setState(() {});
+    } catch (err) {
+      showSnackBar(err.toString(),context);
+    }
+  }
+
+  _signOut(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            backgroundColor: lRed,
+            title: Text(
+              'Do You Want To Sign Out',
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+            children: [
+              SimpleDialogOption(
+                padding: const EdgeInsets.all(15),
+                child: Text(
+                  '   Yes',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                  ),
+                ),
+                onPressed: () async {
+                  String res = await AuthMethods().signOut();
+                  if (res == 'Success') {
+                    showSnackBar('Sgned Out', cont());
+                    setState(() {
+                      navIndex=0;
+                    });
+                    Navigator.of(cont()).pushReplacementNamed('/navigationPage');
+                  } else {
+                    showSnackBar('Sign Out Failed', cont());
+                  }
+                },
+              ),
+              SimpleDialogOption(
+                padding: const EdgeInsets.all(15),
+                child: Text(
+                  '   No',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          );
+        });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,330 +109,383 @@ class accountPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: Padding(
+      body:
+     userData.isEmpty?Center(
+       child: Container(
+         padding: const EdgeInsets.all(10.0),
+         width: 300,
+         height: 300,
+         decoration: BoxDecoration(
+             color: Colors.white,
+             borderRadius: BorderRadius.circular(15.0)
+         ),
+         child: Center(
+             child: CircularProgressIndicator(
+               color: lRed,
+               strokeWidth: 4,
+             )
+         ),
+       ),
+     ): Padding(
         padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0)
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Profile Picture
-                    Container(
-                      padding: const EdgeInsets.all(20.0),
-                      width: MediaQuery.of(context).size.width*.35,
-                      height: 360,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: basicShadow,
-                        image: DecorationImage(
-                            image: AssetImage(dpImage),
-                          fit: BoxFit.cover
-                        )
-                      ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // // Profile Picture
+                // Container(
+                //   padding: const EdgeInsets.all(20.0),
+                //   width: 350,
+                //   height: 350,
+                //   decoration: BoxDecoration(
+                //       color: pRed,
+                //       borderRadius: BorderRadius.circular(20.0),
+                //       image: DecorationImage(
+                //           image: userData['profilePic']!=null?NetworkImage(userData['profilePic']):AssetImage(avatar),
+                //           fit: BoxFit.cover
+                //       )
+                //   ),
+                // ),
+                // sb20,
+                Container(
+                  width: 600,
+                  padding: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0)
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    width: 580,
+                    decoration: BoxDecoration(
+                      color: pRed,
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                    sb20,
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      width: 580,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: basicShadow,
-                      ),
-                      child: Column(
-                        children:  [
-                          Container(
-                              padding: const EdgeInsets.all(2.0),
-                              decoration: BoxDecoration(
+                    child: Column(
+                      children:  [
+                        userData['userTitle'] == 'Admin' ?  Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            quickAccessContainer(icon: Container(
+                              padding: const EdgeInsets.all(.0),
+                              decoration:  BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: pRed,
+                              ),
+                              child: IconButton(
+                                tooltip:'Upload New Property',
+                                icon:Icon(Icons.upload_outlined, color: lRed,),
+                                onPressed: (){ Navigator.pushNamed(context, '/multiUploadPage');},
+                              ),
+                            ), text: 'Upload', func: () { Navigator.pushReplacementNamed(context, '/uploadPage'); },),
+                            quickAccessContainer(icon: Container(
+                              padding: const EdgeInsets.all(.0),
+                              decoration:  BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: pRed,
+                              ),
+                              child: IconButton(
+                                tooltip:'Manage Existing Posts',
+                                icon:Icon(Icons.real_estate_agent_outlined, color: lRed,),
+                                onPressed: (){},
+                              ),
+                            ), text: 'Posts', func: () {  },),
+                            quickAccessContainer(icon: Container(
+                              padding: const EdgeInsets.all(.0),
+                              decoration:  BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: pRed,
+                              ),
+                              child: IconButton(
+                                tooltip:'Change The Website Contact Information',
+                                icon:Icon(Icons.contact_mail_outlined, color: lRed,),
+                                onPressed: (){},
+                              ),
+                            ), text: 'Info', func: () {  },),
+                            quickAccessContainer(icon: Container(
+                              padding: const EdgeInsets.all(.0),
+                              decoration:  BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: pRed,
+                              ),
+                              child: IconButton(
+                                tooltip:'Change Images Used in the Website',
+                                icon:Icon(Icons.photo_library_outlined, color: lRed,),
+                                onPressed: (){},
+                              ),
+                            ), text: 'Images', func: () {  },),
+                            quickAccessContainer(icon: Container(
+                              padding: const EdgeInsets.all(.0),
+                              decoration:  BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: pRed,
+                              ),
+                              child: IconButton(
+                                tooltip:'Update Services Details',
+                                icon:Icon(MdiIcons.tools, color: lRed,),
+                                onPressed: (){},
+                              ),
+                            ), text: 'Services', func: () {  },),
+                          ],
+                        ):sb0,
+                        userData['userTitle'] == 'Admin' ?  sbH10:sb0,
+                        userData['userTitle'] == 'Admin' ?  Container(
+                            padding: const EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child:ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: pRed,
+                                child:  Icon(
+                                  Icons.admin_panel_settings_outlined,
+                                  color: lRed,
+                                ),
+                              ),
+                              title: RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'Administrator',
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 18,
+                                              color: lRed,
+                                              fontWeight: FontWeight.w400
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                              subtitle: RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'Account Status',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w200
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                            )):sb0,
+                        userData['userTitle'] == 'Admin' ? sbH5:sb0,
+                        userData['username'] != null ? Container(
+                            padding: const EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child:ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: pRed,
+                                child:  Icon(
+                                  Icons.person_outlined,
+                                  color: lRed,
+                                ),
+                              ),
+                              title: RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: userData['username'],
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 18,
+                                              color: lRed,
+                                              fontWeight: FontWeight.w400
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                              subtitle: RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'Account Name',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w200
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                              trailing: Container(
+                                padding: const EdgeInsets.all(.0),
+                                decoration:  BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: pRed,
+                                ),
+                                child: IconButton(
+                                  tooltip:  userData['username'] != null ?'Edit Info':'Add Info',
+                                  icon: userData['username'] != null ? Icon(Icons.edit_outlined, color: lRed,):Icon(Icons.add, color: lRed,),
+                                  onPressed: (){},
+                                ),
+                              ),
+                            )):sb0,
+                        userData['username'] != null ? sbH5:sb0,
+                        userData['userNumber'] != null ? Container(
+                            padding: const EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(6.0),
+                                borderRadius: BorderRadius.circular(15.0)
+                            ),
+                            child:ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: pRed,
+                                child:  Icon(
+                                  Icons.phone_outlined,
+                                  color: lRed,
+                                ),
                               ),
-                              child:ListTile(
-                                leading: CircleAvatar(
-                                  backgroundColor: lRed,
-                                  child: const Icon(
-                                    Icons.person_outlined,
-                                    color: Colors.white,
+                              title: RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: userData['userNumber'],
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 18,
+                                              color: lRed,
+                                              fontWeight: FontWeight.w400
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                              subtitle: RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'Phone Number',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w200
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                              trailing: Container(
+                                padding: const EdgeInsets.all(.0),
+                                decoration:  BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: pRed,
+                                ),
+                                child: IconButton(
+                                  tooltip:  userData['username'] != null ?'Edit Info':'Add Info',
+                                  icon: userData['userNumber'] != null ? Icon(Icons.edit_outlined, color: lRed,):Icon(Icons.add, color: lRed,),
+                                  onPressed: (){},
+                                ),
+                              ),
+                            )):sb0,
+                        userData['userNumber'] != null ?sbH5:sb0,
+                        userData['userEmail'] != null ?Container(
+                            padding: const EdgeInsets.all(2.0),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15.0)
+                            ),
+                            child:ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: pRed,
+                                child:  Icon(
+                                  Icons.alternate_email_outlined,
+                                  color: lRed,
+                                ),
+                              ),
+                              title: RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: userData['userEmail'],
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 18,
+                                              color: lRed,
+                                              fontWeight: FontWeight.w400
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                              subtitle: RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'Email Handle',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w200
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                              trailing: Container(
+                                padding: const EdgeInsets.all(.0),
+                                decoration:  BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: pRed,
+                                ),
+                                child: IconButton(
+                                  tooltip:  userData['username'] != null ?'Edit Info':'Add Info',
+                                  icon: userData['userEmail'] != null ? Icon(Icons.edit_outlined, color: lRed,):Icon(Icons.add, color: lRed,),
+                                  onPressed: (){},
+                                ),
+                              ),
+                            )):sb0,
+                        userData['userEmail'] != null ?sbH10:sb0,
+                        userData['uid']!=null?InkWell(
+                          onTap: (){ _signOut(context);},
+                          child: Container(
+                            padding: const EdgeInsets.all(20.0),
+                            decoration: BoxDecoration(
+                              color:lRed,
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Sign Out',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                title: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: userName,
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 18,
-                                                color: lRed,
-                                                fontWeight: FontWeight.w400
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                                subtitle: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'Account Name',
-                                            style: GoogleFonts.poppins(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w200
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                              )),
-                          sbH5,
-                          Container(
-                              padding: const EdgeInsets.all(2.0),
-                              decoration: BoxDecoration(
+                                sb5,
+                                const Icon(
+                                  Icons.logout_outlined,
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(6.0)
-                              ),
-                              child:ListTile(
-                                leading: CircleAvatar(
-                                  backgroundColor: lRed,
-                                  child: const Icon(
-                                    Icons.phone_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                title: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: '+255 743 522 226',
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 18,
-                                                color: lRed,
-                                                fontWeight: FontWeight.w400
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                                subtitle: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'Phone Number',
-                                            style: GoogleFonts.poppins(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w200
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                              )),
-                          sbH5,
-                          Container(
-                              padding: const EdgeInsets.all(2.0),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(6.0)
-                              ),
-                              child:ListTile(
-                                leading: CircleAvatar(
-                                  backgroundColor: lRed,
-                                  child: const Icon(
-                                    Icons.alternate_email_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                title: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'joinsmartestates@gmail.com ',
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 18,
-                                                color: lRed,
-                                                fontWeight: FontWeight.w400
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                                subtitle: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'Email Handle',
-                                            style: GoogleFonts.poppins(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w200
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                              )),
-                          sbH5,
-                          Container(
-                              padding: const EdgeInsets.all(2.0),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8.0)
-                              ),
-                              child:ListTile(
-                                leading: CircleAvatar(
-                                  backgroundColor: lRed,
-                                  child:  Icon(
-                                    MdiIcons.instagram,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                title: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'josmart_real_estate_team ',
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 18,
-                                                color: lRed,
-                                                fontWeight: FontWeight.w400
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                                subtitle: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'Instagram Handle',
-                                            style: GoogleFonts.poppins(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w200
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                              )),
-                          sbH5,
-                          Container(
-                              padding: const EdgeInsets.all(2.0),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8.0)
-                              ),
-                              child:ListTile(
-                                leading: CircleAvatar(
-                                  backgroundColor: lRed,
-                                  child:  Icon(
-                                    MdiIcons.instagram,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                title: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'josmart_real_estate_team ',
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 18,
-                                                color: lRed,
-                                                fontWeight: FontWeight.w400
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                                subtitle: RichText(
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'Instagram Handle',
-                                            style: GoogleFonts.poppins(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w200
-                                            ),
-                                          ),
-                                        ]
-                                    )
-                                ),
-                              )),
-                          sbH5,
-                          // Container(
-                          //   padding: const EdgeInsets.all(8.0),
-                          //   decoration: BoxDecoration(
-                          //       color: lRed,
-                          //       borderRadius: BorderRadius.circular(8.0)
-                          //   ),
-                          //   child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     children: [
-                          //       TextButton(onPressed: (){}, child: Text(
-                          //         'Show All',
-                          //         style: GoogleFonts.poppins(
-                          //             fontWeight: FontWeight.w400,
-                          //             color: Colors.white
-                          //         ),
-                          //       )),
-                          //       sb2,
-                          //       const Icon(Icons.keyboard_arrow_down_sharp,
-                          //         color: Colors.white,
-                          //       )
-                          //     ],
-                          //   ),
-                          // )
-                        ],
-                      ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ):sb0,
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-            // // Profile Information
-            // sbH20,
-            // // Contact Information
-            // sbH20,
-            // // Social Media Links
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: <Widget>[
-            //     IconButton(
-            //       icon: const Icon(Icons.facebook),
-            //       onPressed: () {
-            //         // Open Facebook link
-            //       },
-            //     ),
-            //     IconButton(
-            //       icon: Icon(MdiIcons.twitter),
-            //       onPressed: () {
-            //         // Open Twitter link
-            //       },
-            //     ),
-            //     IconButton(
-            //       icon: Icon(MdiIcons.instagram),
-            //       onPressed: () {
-            //         // Open Instagram link
-            //       },
-            //     ),
-            //   ],
-            // ),
-            // const SizedBox(height: 20),
-            //
-            // // Bio
-            // Text(
-            //   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.',
-            //   style: GoogleFonts.poppins(
-            //       fontSize: 18,
-            //       color: Colors.black
-            //   ),
-            // ),
+            sbH50,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('by nk',
+                  style: GoogleFonts.rajdhani(
+                    color: const Color.fromRGBO(3, 5, 77, .3),
+                    fontSize: 13,
+                  ),),
+              ],
+            )
           ],
         ),
       ),

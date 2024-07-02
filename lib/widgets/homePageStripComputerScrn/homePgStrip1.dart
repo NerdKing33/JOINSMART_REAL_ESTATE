@@ -20,9 +20,9 @@ class _homePgStrip1State extends State<homePgStrip1> {
   final String _location = 'Location';
   int _current = 0;
   final List<String> imgList = [
-    hotel,
     landscapeCity,
     buildings,
+    buildingEquipment
   ];
 late Timer _timer;
   @override
@@ -35,15 +35,21 @@ late Timer _timer;
     _timer.cancel();
     super.dispose();
   }
-  void changeImage() {
+  void changeImage(){
     _timer = Timer.periodic(const Duration(milliseconds: 2800), (timer) {
       setState(() {
-        if(_current < 2){
-          _current++;
+      switch(_current){
+        case 0:{
+          ++_current;
         }
-        else{
-          _current = 0;
+        case 1:{
+          ++_current;
         }
+        case 2:{
+          --_current;
+          --_current;
+        }
+      }
       });
     });
   }
@@ -55,7 +61,7 @@ late Timer _timer;
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           image: DecorationImage(
-              opacity: .8,
+              opacity: 1.0,
               image:  AssetImage(
                   imgList[_current]
               ),
@@ -67,11 +73,11 @@ late Timer _timer;
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(30.0),
             width: 590,
             decoration: const BoxDecoration(
               color: Color.fromRGBO(254, 235, 236, .7),
-              borderRadius: BorderRadius.only(topRight: Radius.circular(10.0),topLeft: Radius.circular(10.0))
+              borderRadius: BorderRadius.only(topRight: Radius.circular(15.0),topLeft: Radius.circular(15.0),bottomLeft: Radius.circular(15.0),bottomRight: Radius.circular(15.0))
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -115,13 +121,13 @@ late Timer _timer;
                       ]
                   ),
                 ),
-                sbH20,
+                sbH10,
                 Container(
                   width: 600,
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(6.0),
+                    color: Colors.white60,
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -129,10 +135,10 @@ late Timer _timer;
                       Container(
                         padding: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.0),
-                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15.0),
+                            color: Colors.white70,
                             border: Border.all(
-                              color: lRed,
+                              color: Colors.red.shade300,
                               width: 1,
                             )
                         ),
@@ -176,10 +182,10 @@ late Timer _timer;
                       Container(
                         padding: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.0),
+                            borderRadius: BorderRadius.circular(15.0),
                             color: Colors.white,
                             border: Border.all(
-                              color: lRed,
+                              color: Colors.red.shade300,
                               width: 1,
                             )
                         ),
@@ -219,19 +225,11 @@ late Timer _timer;
 
                         ),
                       ),
-                      sb5,
-                      // IconButton(
-                      //     onPressed: (){},
-                      //     icon:  Icon(
-                      //       Icons.filter_list_outlined,
-                      //       color: selectedColor,
-                      //     )
-                      // ),
-                      sb5,
+                      sb10,
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 13.0),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.0),
+                            borderRadius: BorderRadius.circular(15.0),
                             color: selectedColor,
                             border: Border.all(
                               color: Colors.white,
@@ -261,39 +259,40 @@ late Timer _timer;
                     ],
                   ),
                 ),
+                sbH10,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.white54,
+                        borderRadius: BorderRadius.circular(15.0),
                       ),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              width: 30.0,
-                              height: 30.0,
-                              margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: _current == 0
-                                    ? Colors.black38
-                                    : Colors.transparent,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  '1',
-                                  style: GoogleFonts.galdeano(
-                                      color:_current == 0
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontWeight: FontWeight.bold
-                                  ),
+                            width: 30.0,
+                            height: 30.0,
+                            margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _current == 0
+                                  ? Colors.black38
+                                  : Colors.transparent,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '1',
+                                style: GoogleFonts.galdeano(
+                                    color:_current == 0
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontWeight: FontWeight.bold
                                 ),
                               ),
+                            ),
                             ),
                             Container(
                               width: 30.0,
@@ -347,6 +346,7 @@ late Timer _timer;
               ],
             ),
           ),
+          sbH20
         ],
       ),
     );

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../impVariable.dart';
 
 class pageHeader extends StatefulWidget {
-  final String title;
+  final String? title;
   final  double fontSize;
   final  double height;
   final  double width;
@@ -12,9 +12,10 @@ class pageHeader extends StatefulWidget {
   final FontWeight fontWeight;
   final Widget? widget;
   final Color? color;
+  final String ? upperCase;
   const pageHeader({
     super.key,
-    required this.title,
+    this.title,
     required this.fontSize,
     required this.mainAxisAlignment,
     required this.fontWeight,
@@ -22,6 +23,7 @@ class pageHeader extends StatefulWidget {
     required this.width,
     this.widget,
     this.color,
+    this.upperCase,
   });
 
   @override
@@ -47,7 +49,7 @@ class _pageHeaderState extends State<pageHeader> {
             text: TextSpan(
                 children: [
                   TextSpan(
-                    text: widget.title,
+                    text: widget.upperCase?.toUpperCase() ?? widget.title,
                     style: GoogleFonts.poppins(
                       fontWeight: widget.fontWeight,
                       color: widget.color ??Theme.of(context).colorScheme.secondary,

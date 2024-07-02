@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:housing_information_website/pages/postPage.dart';
 import '../impVariable.dart';
 import '../themes/theme.dart';
+import '../utils.dart';
 
 class propertyCard extends StatefulWidget {
-  final String post;
-  final String location;
-  final int price;
-  final int noRooms;
-  final double sqMtrs;
-  final String period;
+  final Map<String, dynamic> postId;
   const propertyCard({
     super.key,
-    required this.post,
-    required this.location,
-    required this.price,
-    required this.noRooms,
-    required this.sqMtrs,
-    required this.period
+    required this.postId
   });
 
   @override
@@ -26,9 +17,38 @@ class propertyCard extends StatefulWidget {
 }
 
 class _propertyCardState extends State<propertyCard> {
-  @override
+
+
+
+    @override
   Widget build(BuildContext context) {
-    return Padding(
+    return widget.postId['uid'] == null
+        ? Center(
+      child: Container(
+        padding: const EdgeInsets.all(10.0),
+        width: 950,
+        height: 790,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+            color: Colors.grey.shade200,
+            boxShadow: [BoxShadow(
+                color: Colors.grey.shade400,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 5.0,
+                spreadRadius: 2.0)]),
+        child: Center(
+          child: SizedBox(
+            height: 100,
+            width: 100,
+            child: CircularProgressIndicator(
+              strokeWidth: 5,
+              color: lRed,
+            ),
+          ),
+        ),
+      ),
+    )
+        : Padding(
       padding: const EdgeInsets.all(15.0),
       child: Container(
         decoration: BoxDecoration(
@@ -46,7 +66,7 @@ class _propertyCardState extends State<propertyCard> {
                     color: pRed,
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(0.0)),
                     image: DecorationImage(
-                      image: AssetImage(widget.post),
+                      image: NetworkImage(widget.postId['mainPost']),
                       fit: BoxFit.cover,
                     )
                 ),
@@ -67,7 +87,7 @@ class _propertyCardState extends State<propertyCard> {
                         text: TextSpan(
                             children: [
                               TextSpan(
-                                  text: widget.location,
+                                  text: widget.postId['propertyLocation'],
                                   style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 24,
@@ -92,7 +112,7 @@ class _propertyCardState extends State<propertyCard> {
                                       )
                                   ),
                                   TextSpan(
-                                      text: '${widget.price}',
+                                      text: '${widget.postId['price']}',
                                       style: GoogleFonts.galdeano(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 28,
@@ -101,7 +121,7 @@ class _propertyCardState extends State<propertyCard> {
                                       )
                                   ),
                                   TextSpan(
-                                      text: '/${widget.period}',
+                                      text: '/${widget.postId['paymentPeriod']}',
                                       style: GoogleFonts.galdeano(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 20,
@@ -118,7 +138,7 @@ class _propertyCardState extends State<propertyCard> {
                             text: TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: '${widget.sqMtrs} ',
+                                      text: '${widget.postId['area']} ',
                                       style: GoogleFonts.galdeano(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 20,
@@ -143,7 +163,7 @@ class _propertyCardState extends State<propertyCard> {
                             text: TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: '${widget.noRooms} ',
+                                      text: '${widget.postId['noRooms']} ',
                                       style: GoogleFonts.galdeano(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 20,
@@ -168,7 +188,7 @@ class _propertyCardState extends State<propertyCard> {
                         text: TextSpan(
                             children: [
                               TextSpan(
-                                  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+                                  text: '${widget.postId['description']}',
                                   style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 18,

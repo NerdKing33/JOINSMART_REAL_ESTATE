@@ -25,10 +25,12 @@ String prpty4 = 'lib/images/prpty4.jpg';
 String prpty2 = 'lib/images/prpty2.jpg';
 String prpty1 = 'lib/images/prpty1.jpg';
 String lndScp = 'lib/images/lndScp.jpg';
+String hs1 = 'lib/images/hs1.jpg';
 String hs2 = 'lib/images/hs2.jpg';
 String hs3 = 'lib/images/hs3.jpg';
 String hs4 = 'lib/images/hs4.jpg';
 String hs5 = 'lib/images/hs5.jpg';
+String avatar = 'lib/images/avatar.jpg';
 
 
 
@@ -36,6 +38,7 @@ String title = 'Joinsmart Estates';
 String userName = 'KWAME PETER MUSHI';
 String titleCptl = 'JOINSMART ESTATES ';
 int navIndex =0;
+int navIndex2 =0;
 
 
 SizedBox sb0 = const SizedBox(width: 0);

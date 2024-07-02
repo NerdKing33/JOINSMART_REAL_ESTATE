@@ -9,7 +9,7 @@ import 'package:page_transition/page_transition.dart';
 import '../impVariable.dart';
 import '../resources/firebaseStorage.dart';
 import '../themes/theme.dart';
-import '../widgets/snackBar.dart';
+import '../utils.dart';
 
 class postPage extends StatefulWidget {
   final String postId;
@@ -45,7 +45,9 @@ class _postPageState extends State<postPage> {
       images.add(await userPostData['mainPost']);
       images.addAll(await userPostData['secondaryPosts']);
     } catch (err) {
-      snackBar(description: err.toString(),);
+      setState(() {
+        showSnackBar(err.toString(),context);
+      });
     }
   }
 
@@ -77,14 +79,15 @@ class _postPageState extends State<postPage> {
                 onPressed: () async {
                   String res = await storageMethods().deletePost(widget.postId);
                   if (res == 'success') {
-                    const snackBar(description: 'postDeleted');
-                    Navigator.of(context).pop;
-                    Navigator.of(context).pushReplacement(PageTransition(
-                        child: navigationPage(),
-                        type: PageTransitionType.topToBottom,
-                        duration: const Duration(milliseconds: 300)));
+                    setState(() {
+                      showSnackBar(res,context);
+                      Navigator.pop(context);
+                    });
+
                   } else {
-                    const snackBar(description: 'deleteFailed',);
+                    setState(() {
+                      showSnackBar('Delete Failed',context);
+                    });
                   }
                 },
               ),
@@ -148,6 +151,7 @@ class _postPageState extends State<postPage> {
                 spreadRadius: 2.0)]),
         child: Column(
           children: [
+            ///propertyTitleAreaAndActionWidgets
             Container(
               height: 80,
               padding: const EdgeInsets.all(8.0),
@@ -160,7 +164,7 @@ class _postPageState extends State<postPage> {
                 children: userPostData['uid'] == null
                     ? [
                   pageHeader(
-                    title: '${userPostData['propertyTitle']} - ${userPostData['propertyType']}', fontSize: 20, mainAxisAlignment: MainAxisAlignment.start, fontWeight: FontWeight.w300, height: 0, width: 2, color: Colors.black,),
+                    upperCase: '${userPostData['propertyTitle']} - ${userPostData['propertyType']}', fontSize: 20, mainAxisAlignment: MainAxisAlignment.start, fontWeight: FontWeight.w300, height: 0, width: 2, color: Colors.black,),
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
@@ -183,7 +187,7 @@ class _postPageState extends State<postPage> {
                 ]
                     : [
                   pageHeader(
-                    title: '${userPostData['propertyTitle']} - ${userPostData['propertyType']}', fontSize: 20, mainAxisAlignment: MainAxisAlignment.start, fontWeight: FontWeight.w300, height: 0, width: 2, color: Colors.black,),
+                    upperCase: '${userPostData['propertyTitle']} - ${userPostData['propertyType']}', fontSize: 20, mainAxisAlignment: MainAxisAlignment.start, fontWeight: FontWeight.w300, height: 0, width: 2, color: Colors.black,),
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
