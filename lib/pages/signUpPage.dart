@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/impVariable.dart';
+import 'package:housing_information_website/pages/logInPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
+import 'package:page_transition/page_transition.dart';
 import '../resources/auth.dart';
-import '../utils.dart';
+import '../resources/utils.dart';
 
 
 class signUpPage extends StatefulWidget {
+  const signUpPage({super.key});
+
   @override
   _signUpPageState createState() => _signUpPageState();
 }
@@ -134,7 +138,10 @@ class _signUpPageState extends State<signUpPage> {
                         ),
                         child: IconButton(
                             onPressed: (){
-                                Navigator.pushReplacementNamed(context, '/logInPage');
+                              Navigator.of(context).pushReplacement(PageTransition(
+                                  duration: const Duration(milliseconds: 300),
+                                  child: const logInPage(),
+                                  type: PageTransitionType.bottomToTop));
                             },
                             icon:Text(
                               'Log In',

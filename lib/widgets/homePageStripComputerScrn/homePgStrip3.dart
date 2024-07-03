@@ -17,9 +17,9 @@ class _homePgStrip3State extends State<homePgStrip3> {
     return showDialog(context: context, builder: (context){
       return  AlertDialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0)
+          borderRadius: BorderRadius.circular(15.0)
         ),
-        backgroundColor: pRed,
+        backgroundColor: Colors.white,
         title: RichText(
           text: TextSpan(
             children: [
@@ -56,8 +56,12 @@ class _homePgStrip3State extends State<homePgStrip3> {
           Container(
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: lRed,
-              borderRadius: BorderRadius.circular(12.0),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(
+                  color: lRed,
+                  width: .5,
+                )
             ),
             child: IconButton(
                 onPressed: (){
@@ -66,9 +70,9 @@ class _homePgStrip3State extends State<homePgStrip3> {
                 icon: Text(
                   'CLOSE',
                   style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18
+                      color: lRed,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18
                   ),
                 )
             ),

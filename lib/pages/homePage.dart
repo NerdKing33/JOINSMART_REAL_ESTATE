@@ -1,16 +1,12 @@
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/pages/postPage.dart';
-import 'package:housing_information_website/themes/theme.dart';
 import 'package:housing_information_website/widgets/footerSection.dart';
-import '../impVariable.dart';
+import 'package:housing_information_website/widgets/homePagePostStrip.dart';
 import '../widgets/homePageStripComputerScrn/homePgStrip1.dart';
 import '../widgets/homePageStripComputerScrn/homePgStrip2.dart';
 import '../widgets/homePageStripComputerScrn/homePgStrip3.dart';
-import '../widgets/homePagePostStrip.dart';
-import '../widgets/propertyCard.dart';
+
 
 class homePage extends StatefulWidget {
   const homePage({super.key});
@@ -78,12 +74,7 @@ class _homePageState extends State<homePage> with TickerProviderStateMixin{
     }
   }
 
-  showPost(BuildContext context, String postId) async {
-    return showDialog(context: context, builder:
-        (context){
-      return postPage(postId: postId);
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,83 +82,7 @@ class _homePageState extends State<homePage> with TickerProviderStateMixin{
       body: ListView(
         children: <Widget>[
           const homePgStrip1(),
-      StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('Posts').snapshots(),
-        builder: (BuildContext context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          return Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-              ),
-              child: Column(
-                children: [
-                  sbH30,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Featured Properties',
-                        style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                            fontSize: 35
-                        ),
-                      )
-                    ],
-                  ),
-                  sbH30,
-                  SizedBox(
-                    height: 1000,
-                    child: ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return postPage(
-                          postId: snapshot.data!.docs[index].data()['postId'],
-                        );
-                      },
-                    ),
-                  ),
-                  sbH20,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: lRed,
-                            borderRadius: BorderRadius.circular(5.0),
-                            border: Border.all(
-                              color: Theme
-                                  .of(context)
-                                  .colorScheme
-                                  .secondary,
-                              width: .9,
-                            )
-                        ),
-                        child: TextButton(onPressed: () {
-                          setState(() {
-                            navIndex = 1;
-                          });
-                        }, child: Text(
-                          'View More Properties',
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 18,
-                            wordSpacing: 1.5,
-                          ),
-                        )),
-                      )
-                    ],
-                  ),
-                  sbH50
-                ],
-              ),
-            );
-        },
-      ),
+          const homePagePostStrip(),
           const homePgStrip2(),
           const homePgStrip3(),
           footerSection(),

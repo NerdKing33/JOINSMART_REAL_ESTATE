@@ -13,7 +13,6 @@ class homePgStrip2 extends StatefulWidget {
 }
 
 class _homePgStrip2State extends State<homePgStrip2> {
-  final String _location = 'Location';
 
   @override
   Widget build(BuildContext context) {

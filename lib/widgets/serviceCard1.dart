@@ -9,7 +9,8 @@ class serviceCard1 extends StatelessWidget {
   final String title;
   final String description;
 
-  serviceCard1({
+  const serviceCard1({
+    super.key,
     required this.icon,
     required this.title,
     required this.description

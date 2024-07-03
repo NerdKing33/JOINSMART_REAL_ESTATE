@@ -1,13 +1,9 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../impVariable.dart';
 import '../themes/theme.dart';
-import '../utils.dart';
 import '../widgets/pageHeader.dart';
 
 class secondaryImagesUploadPage extends StatefulWidget {

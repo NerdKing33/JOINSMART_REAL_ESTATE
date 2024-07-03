@@ -1,12 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/widgets/pageHeader.dart';
-import 'package:housing_information_website/widgets/homePagePostStrip.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
 import '../impVariable.dart';
-import '../themes/theme.dart';
 import '../widgets/propertyCard.dart';
 
 class propertiesPage extends StatefulWidget {
@@ -20,7 +15,7 @@ class _propertiesPageState extends State<propertiesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[100],
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('Posts').snapshots(),
         builder: (BuildContext context,
@@ -41,17 +36,26 @@ class _propertiesPageState extends State<propertiesPage> {
             children:  [
               const pageHeader(title: 'FIND YOUR DREAM PROPERTY HERE...', fontSize: 24, mainAxisAlignment: MainAxisAlignment.center, fontWeight: FontWeight.w400, height: 5, width: 20),
            sbH20,
-           GridView.builder(
-           itemCount: snapshot.data!.docs.length,
-           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-           crossAxisCount: 2),
-           itemBuilder: (BuildContext context, int index) {
-           return propertyCard(
-           postId: snapshot.data!.docs[index].data()['postId'],);
-           },
+           SizedBox(
+             height: MediaQuery.of(context).size.height*.9,
+             width: MediaQuery.of(context).size.width,
+             child: GridView.builder(
+               scrollDirection: MediaQuery.of(context).size.width >= 1300 ? Axis.vertical:Axis.horizontal,
+             itemCount:  snapshot.data!.docs.isNotEmpty ? snapshot.data!.docs.length:0,
+             gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+             crossAxisCount: MediaQuery.of(context).size.width >= 1300 ? 2:1,),
+             itemBuilder: (BuildContext context, int index) {
+             return Padding(
+                 padding: const EdgeInsets.all(8.0),
+               child: snapshot.data!.docs.isNotEmpty ? propertyCard(
+               postId: snapshot.data!.docs[index].data(),
+               ):sb0);
+             },
+             ),
            ),
-              sbH20,
-              pageHeader(title: 'Loading Up More Properties ....', fontSize: 18, mainAxisAlignment: MainAxisAlignment.center, fontWeight: FontWeight.w400, height: 0, width: 0 , color: Colors.grey.shade800,)
+              sbH10,
+              pageHeader(title: 'Loading Up More Properties ....', fontSize: 18, mainAxisAlignment: MainAxisAlignment.center, fontWeight: FontWeight.w400, height: 0, width: 0 , color: Colors.grey.shade800,),
+            sbH20,
             ],
           );
         },

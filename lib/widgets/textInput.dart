@@ -6,13 +6,12 @@ class textInput extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)?  validation;
   final String hinty;
-  final icon;
+  final IconData icon;
   final bool obscureText;
   final TextInputType textInputType;
   final TextCapitalization textCapitalization;
-  String item = '';
 
-  textInput({
+  const textInput({
     super.key,
     required this.controller,
     required this.hinty,

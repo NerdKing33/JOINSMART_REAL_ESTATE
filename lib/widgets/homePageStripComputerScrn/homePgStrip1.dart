@@ -1,10 +1,11 @@
 import 'dart:async';
-import 'dart:ui';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import 'package:housing_information_website/pages/searchPropertiesPage.dart';
+import 'package:housing_information_website/widgets/searchDropdown/locationSearch.dart';
+import 'package:housing_information_website/widgets/searchDropdown/propertyTypeSearch.dart';
+import 'package:page_transition/page_transition.dart';
 import '../../impVariable.dart';
 import '../../themes/theme.dart';
 import '../pageHeader.dart';
@@ -17,12 +18,13 @@ class homePgStrip1 extends StatefulWidget {
 }
 
 class _homePgStrip1State extends State<homePgStrip1> {
-  final String _location = 'Location';
+  final TextEditingController _location= TextEditingController();
+  final TextEditingController _houseType= TextEditingController();
   int _current = 0;
   final List<String> imgList = [
+    lndScp,
     landscapeCity,
     buildings,
-    buildingEquipment
   ];
 late Timer _timer;
   @override
@@ -55,9 +57,8 @@ late Timer _timer;
   }
   @override
   Widget build(BuildContext context) {
-    Color selectedColor = Theme.of(context).colorScheme.secondary;
     return  Container(
-      height: MediaQuery.of(context).size.height * .75, // responsive height
+      height: MediaQuery.of(context).size.height * .8, // responsive height
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -132,128 +133,32 @@ late Timer _timer;
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(6.0),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            color: Colors.white70,
-                            border: Border.all(
-                              color: Colors.red.shade300,
-                              width: 1,
-                            )
-                        ),
-                        child: DropdownButton<String>(
-                          hint: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: selectedColor,
-                                child: const Icon(
-                                  Icons.location_on_outlined,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              sb5,
-                              Text(
-                                'Location',
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey[700] ,
-                                    fontSize: 16
-                                ),
-                              ),
-                            ],
-                          ),
-                          items: [],
-                          underline: sb0,
-                          onChanged: (Object? k) {
-                            setState(() {
-                              _location == k;
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down_sharp,
-                            color: Colors.black,
-                          ),
-
-                        ),
-                      ),
+                      SizedBox(
+                          width: 190,
+                          child: locationSearch(controller: _location)),
+                      sb10,
+                      SizedBox(
+                          width: 230,
+                          child: propertyTypeSearch(textController: _houseType)),
                       sb10,
                       Container(
-                        padding: const EdgeInsets.all(6.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.red.shade300,
-                              width: 1,
-                            )
+                            color: lRed,
                         ),
-                        child: DropdownButton<String>(
-                          hint: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: selectedColor,
-                                child: Icon(
-                                  MdiIcons.homeRoof,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              sb5,
-                              Text(
-                                'Property Type',
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey[700] ,
-                                    fontSize: 16
-                                ),
-                              ),
-                            ],
-                          ),
-                          items: [],
-                          underline: sb0,
-                          onChanged: (Object? k) {
-                            setState(() {
-                              _location == k;
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down_sharp,
-                            color: Colors.black,
-                          ),
-
-                        ),
-                      ),
-                      sb10,
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 13.0),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            color: selectedColor,
-                            border: Border.all(
+                        child: IconButton(
+                            onPressed: (){
+                              Navigator.of(context).push(PageTransition(
+                                  duration: const Duration(milliseconds: 250),
+                                  child: searchPropertiesPage(location: _location.text, propertyType: _houseType.text),
+                                  type: PageTransitionType.bottomToTop));
+                              },
+                            icon: const Icon(
+                              size: 30,
+                              Icons.search_outlined,
                               color: Colors.white,
-                              width: 1,
-                            )
-                        ),
-                        child: TextButton(
-                            onPressed: (){},
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.search_outlined,
-                                  color: Colors.white,
-                                ),
-                                Text(
-                                  ' Search',
-                                  style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 20,
-                                      color: Colors.white
-                                  ),
-                                )
-                              ],
-                            )
+                            ),
                         ),
                       )
                     ],

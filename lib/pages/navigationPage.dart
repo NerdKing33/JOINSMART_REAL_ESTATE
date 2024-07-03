@@ -4,21 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/pages/aboutPage.dart';
 import 'package:housing_information_website/pages/accountPage.dart';
-import 'package:housing_information_website/pages/geoPointUploadPage.dart';
 import 'package:housing_information_website/pages/homePage.dart';
 import 'package:housing_information_website/pages/logInPage.dart';
 import 'package:housing_information_website/pages/propertiesPage.dart';
 import 'package:housing_information_website/pages/servicesPage.dart';
 import 'package:housing_information_website/pages/signUpPage.dart';
-import 'package:housing_information_website/pages/imageUploadPage.dart';
-import 'package:housing_information_website/utils.dart';
+import 'package:housing_information_website/resources/utils.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../impVariable.dart';
 import '../themes/theme.dart';
 
 class navigationPage extends StatefulWidget {
 
-   navigationPage({super.key});
+   const navigationPage({super.key});
 
   @override
   State<navigationPage> createState() => _navigationPageState();
@@ -30,11 +29,10 @@ class _navigationPageState extends State<navigationPage> {
      const homePage(),
      const propertiesPage(),
      const servicesPage(),
-     aboutPage(),
-     imageUploadPage(),
+     const aboutPage(),
      const accountPage(),
-     signUpPage(),
-     logInPage(),
+     const signUpPage(),
+     const logInPage(),
    ];
   var userData = {};
   @override
@@ -51,10 +49,79 @@ class _navigationPageState extends State<navigationPage> {
       userData = snap.data()!;
       setState(() {});
     } catch (err) {
-      showSnackBar(err.toString(), context);
+      setState(() {
+        showSnackBar(err.toString(), context);
+      });
     }
   }
-
+   infoCard( String title, String info ){
+     return showDialog(context: context, builder: (context){
+       return  AlertDialog(
+         shape: RoundedRectangleBorder(
+             borderRadius: BorderRadius.circular(15.0)
+         ),
+         backgroundColor: Colors.white,
+         title: RichText(
+           text: TextSpan(
+               children: [
+                 TextSpan(
+                   text: title,
+                   style: GoogleFonts.poppins(
+                       fontWeight: FontWeight.w500,
+                       color: lRed,
+                       letterSpacing: 1.5,
+                       wordSpacing: 2,
+                       fontSize: 30
+                   ),
+                 )
+               ]
+           ),
+         ),
+         content:  RichText(
+           text: TextSpan(
+               children: [
+                 TextSpan(
+                   text: info,
+                   style: GoogleFonts.poppins(
+                       color: Colors.black,
+                       fontWeight: FontWeight.w400,
+                       letterSpacing: 1.5,
+                       wordSpacing: 2,
+                       fontSize: 24
+                   ),
+                 )
+               ]
+           ),
+         ),
+         actions: [
+           Container(
+             padding: const EdgeInsets.all(8.0),
+             decoration: BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.circular(10.0),
+                 border: Border.all(
+                   color: lRed,
+                   width: .5,
+                 )
+             ),
+             child: IconButton(
+                 onPressed: (){
+                   Navigator.of(context).pop();
+                 },
+                 icon: Text(
+                   'CLOSE',
+                   style: GoogleFonts.poppins(
+                       color: lRed,
+                       fontWeight: FontWeight.w500,
+                       fontSize: 18
+                   ),
+                 )
+             ),
+           )
+         ],
+       );
+     });
+   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -289,7 +356,13 @@ class _navigationPageState extends State<navigationPage> {
                                 )
                             ),
                             child: IconButton(
-                                onPressed: (){},
+                                onPressed: (){ infoCard(
+                                    'OUR CONTACT INFORMATIONS:',
+                                    'Phone number: +255 743 522 226\n\n'
+                                        'Email: josmartrealestateteam@gmail.com\n\n'
+                                        'Instagram: josmart_real_estate_team\n\n'
+                                        'Whatsapp: +255 743 522 226'
+                                );},
                                 icon:Text(
                                   'CONTACT US',
                                   style: GoogleFonts.poppins(
@@ -320,7 +393,7 @@ class _navigationPageState extends State<navigationPage> {
                                       highlightColor: lRed,
                                       onPressed: (){
                                         setState(() {
-                                          navIndex = 5;
+                                          navIndex = 4;
                                         });
                                       },
                                       icon: const Icon(
@@ -333,7 +406,10 @@ class _navigationPageState extends State<navigationPage> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: IconButton(
                                     onPressed: (){
-                                      Navigator.of(context).pushReplacementNamed('/signUpPage');
+                                      Navigator.of(context).pushReplacement(PageTransition(
+                                          duration: const Duration(milliseconds: 300),
+                                          child: const signUpPage(),
+                                          type: PageTransitionType.bottomToTop));
                                     },
                                         icon: Text(
                                           'SIGN UP',

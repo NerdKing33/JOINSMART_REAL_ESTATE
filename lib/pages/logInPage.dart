@@ -4,10 +4,12 @@ import 'package:housing_information_website/impVariable.dart';
 import 'package:housing_information_website/themes/theme.dart';
 
 import '../resources/auth.dart';
-import '../utils.dart';
+import '../resources/utils.dart';
 
 
 class logInPage extends StatefulWidget {
+  const logInPage({super.key});
+
   @override
   _logInPageState createState() => _logInPageState();
 }
@@ -28,7 +30,9 @@ class _logInPageState extends State<logInPage> {
       password: passwordController.text,
     );
     if (res == 'Success') {
-      showSnackBar('Login Success', context);
+      setState(() {
+        showSnackBar('Login Success', context);
+      });
       setState(() {
         isLoading = false;
       });
@@ -38,7 +42,9 @@ class _logInPageState extends State<logInPage> {
       setState(() {
         isLoading = false;
       });
-      showSnackBar(res, context);
+      setState(() {
+        showSnackBar(res, context);
+      });
     }
   }
 

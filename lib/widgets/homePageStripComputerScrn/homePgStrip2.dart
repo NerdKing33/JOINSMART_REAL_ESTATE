@@ -14,11 +14,14 @@ class homePgStrip2 extends StatefulWidget {
 }
 
 class _homePgStrip2State extends State<homePgStrip2> {
-  final String _location = 'Location';
-
+servicesPageNav(){
+  setState(() {
+    navIndex = 2;
+    Navigator.of(context).pushReplacementNamed('/navigationPage');
+  });
+}
   @override
   Widget build(BuildContext context) {
-    Color selectedColor = Theme.of(context).colorScheme.secondary;
     return  Container(
       height: MediaQuery.of(context).size.height * 0.8, // responsive height
       width: MediaQuery.of(context).size.width, //
@@ -147,7 +150,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                         ),
                         child:ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: selectedColor,
+                            backgroundColor: lRed,
                             child: Icon(
                               MdiIcons.tools,
                               color: Colors.white,
@@ -190,7 +193,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                         ),
                         child:ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: selectedColor,
+                            backgroundColor: lRed,
                             child: const Icon(
                               Icons.groups_outlined,
                               color: Colors.white,
@@ -233,7 +236,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                         ),
                         child:ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: selectedColor,
+                            backgroundColor: lRed,
                             child: const Icon(
                               Icons.groups_outlined,
                               color: Colors.white,
@@ -271,12 +274,12 @@ class _homePgStrip2State extends State<homePgStrip2> {
                     Container(
                       padding: const EdgeInsets.all(.0),
                       decoration: BoxDecoration(
-                          color: selectedColor,
+                          color: lRed,
                           borderRadius: BorderRadius.circular(15.0)
                       ),
                       child: InkWell(
                         onTap: (){
-                        Navigator.of(context).pushNamed('/servicesPage');
+                          servicesPageNav();
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
@@ -284,7 +287,7 @@ class _homePgStrip2State extends State<homePgStrip2> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Show All',
+                                'SEE SERVICES',
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white,

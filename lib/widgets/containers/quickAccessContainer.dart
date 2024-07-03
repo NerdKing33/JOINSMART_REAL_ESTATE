@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:housing_information_website/themes/theme.dart';
 
 class quickAccessContainer extends StatelessWidget {
   final Widget icon;
   final String text;
   final void Function()? func;
-  quickAccessContainer({
-    Key? key,
+  const quickAccessContainer({
+    super.key,
     required this.icon,
     required this.text,
   required this.func,

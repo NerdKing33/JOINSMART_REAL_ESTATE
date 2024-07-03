@@ -14,7 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../themes/theme.dart';
-import '../utils.dart';
+import '../resources/utils.dart';
 import '../widgets/detailsDropdown/areaDetails.dart';
 import '../widgets/detailsDropdown/bathroomsDetails.dart';
 import '../widgets/detailsDropdown/floorDetails.dart';
@@ -233,8 +233,9 @@ try {
     isUploading = false;
   });
   res = err.toString();
+setState(() {
   showSnackBar(res, context);
-}
+});}
 return res;
   }
 
@@ -267,7 +268,7 @@ return res;
       appBar: AppBar(
         leading: IconButton(
           onPressed: (){
-            Navigator.pushReplacementNamed(context, '/navigationPage');
+            Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back_ios_outlined,
@@ -732,11 +733,11 @@ return res;
                           textInputType: TextInputType.name,
                           textCapitalization: TextCapitalization.none,
                           validation: (value) {
-                            if (value!.isNotEmpty&&value.characters.length<340) {
+                            if (value!.isNotEmpty&&value.characters.length<=340) {
                               value.characters.first.toUpperCase();
                               return null;
                             }
-                            return 'Please Enter a Description that is less than 400 characters';
+                            return 'Please Enter a Description that is less than 340 characters';
                           },),
                         textInput(
                           controller: agentNumberController,
@@ -788,7 +789,7 @@ return res;
                             roomDetails(textController: noRoomsController),
                             //bathroomsDetailsDropdown
                             bathroomsDetails(textController: noBathroomsController,),
-                            //acersDetailsDropdown
+                            //areaDetailsDropdown
                             areaDetails(textController: areaController,),
                           ],
                         ),
@@ -1100,7 +1101,7 @@ return res;
     children: [
     SizedBox(
     height: 410,
-    width: 300,
+    width: 350,
     child: Container(
     decoration:  BoxDecoration(
     color: Colors.white,
@@ -1116,7 +1117,7 @@ return res;
     ),
     sb10,
     SizedBox(
-    width: 620,
+    width: 570,
     height: 420,
     child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -1125,7 +1126,7 @@ return res;
     children: [
     Container(
     padding: const EdgeInsets.all(10.0),
-    width: 440,
+    width: 390,
     decoration: BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.circular(15.0),
@@ -1230,7 +1231,7 @@ return res;
     ),
     ),
     TextSpan(
-    text: ' m',
+    text: ' ft',
     style: GoogleFonts.poppins(
     fontWeight: FontWeight.w300,
     color: Colors.black),
@@ -1241,7 +1242,8 @@ return res;
     child: Text(
     '2',
     style: GoogleFonts.galdeano(
-    fontSize: 14
+    fontSize: 14,
+      color: Colors.black
     ),
     ),
     ),
@@ -1361,13 +1363,17 @@ return res;
         child:Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-            'RESTART',
-            style: GoogleFonts.poppins(
-            color: lRed,
-            fontWeight: FontWeight.w500,
-            letterSpacing: 1.2,
-            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical:10.0),
+              child: Text(
+              'RESTART',
+              style: GoogleFonts.poppins(
+              color: lRed,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 1.2,
+              ),
+              ),
             ),
           ],
         )

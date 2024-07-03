@@ -8,7 +8,7 @@ import 'package:video_player/video_player.dart';
 
 import '../impVariable.dart';
 import '../themes/theme.dart';
-import '../utils.dart';
+import '../resources/utils.dart';
 import '../widgets/pageHeader.dart';
 
 class videoUploadPage extends StatefulWidget {

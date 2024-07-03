@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:housing_information_website/pages/navigationPage.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:housing_information_website/pages/mapPage.dart';
 import 'package:housing_information_website/widgets/pageHeader.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -9,7 +10,7 @@ import 'package:page_transition/page_transition.dart';
 import '../impVariable.dart';
 import '../resources/firebaseStorage.dart';
 import '../themes/theme.dart';
-import '../utils.dart';
+import '../resources/utils.dart';
 
 class postPage extends StatefulWidget {
   final String postId;
@@ -26,15 +27,14 @@ class postPage extends StatefulWidget {
 class _postPageState extends State<postPage> {
   var userPostData = {};
   List<dynamic> images = [];
-  late bool selected = false;
 
   @override
   void initState() {
     super.initState();
-    addDataPost();
+    postData();
   }
   
-  addDataPost() async {
+  postData() async {
     try {
       var snap = await FirebaseFirestore.instance
           .collection('Posts')
@@ -108,6 +108,71 @@ class _postPageState extends State<postPage> {
         });
   }
 
+  infoCard( String title, String info ){
+    return showDialog(context: context, builder: (context){
+      return  AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)
+        ),
+        backgroundColor: Colors.white,
+        title: RichText(
+          text: TextSpan(
+              children: [
+                TextSpan(
+                  text: title,
+                  style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w500,
+                      color: lRed,
+                      letterSpacing: 1.5,
+                      wordSpacing: 2,
+                      fontSize: 30
+                  ),
+                )
+              ]
+          ),
+        ),
+        content:  RichText(
+          text: TextSpan(
+              children: [
+                TextSpan(
+                  text: info,
+                  style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 1.5,
+                      wordSpacing: 2,
+                      fontSize: 24
+                  ),
+                )
+              ]
+          ),
+        ),
+        actions: [
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: lRed,
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: IconButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+                icon: Text(
+                  'CLOSE',
+                  style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18
+                  ),
+                )
+            ),
+          )
+        ],
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return userPostData['uid'] == null
@@ -117,13 +182,9 @@ class _postPageState extends State<postPage> {
         width: 950,
         height: 790,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(15.0),
             color: Colors.grey.shade200,
-            boxShadow: [BoxShadow(
-                color: Colors.grey.shade400,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 5.0,
-                spreadRadius: 2.0)]),
+           ),
         child: Center(
           child: SizedBox(
             height: 100,
@@ -144,11 +205,7 @@ class _postPageState extends State<postPage> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             color: Colors.grey.shade100,
-            boxShadow: [BoxShadow(
-                color: Colors.grey.shade400,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 5.0,
-                spreadRadius: 2.0)]),
+        ),
         child: Column(
           children: [
             ///propertyTitleAreaAndActionWidgets
@@ -179,6 +236,16 @@ class _postPageState extends State<postPage> {
                             onPressed: (){},
                             icon: Icon(
                               Icons.bookmark_add_outlined,
+                              color: lRed,
+                            )),
+                        IconButton(
+                            highlightColor: lRed,
+                            hoverColor: pRed,
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.cancel_outlined,
                               color: lRed,
                             )),
                       ],
@@ -220,6 +287,16 @@ class _postPageState extends State<postPage> {
                             },
                             icon: Icon(
                               Icons.delete_outline_outlined,
+                              color: lRed,
+                            )),
+                        IconButton(
+                            highlightColor: lRed,
+                            hoverColor: pRed,
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.cancel_outlined,
                               color: lRed,
                             )),
                       ],
@@ -367,7 +444,7 @@ class _postPageState extends State<postPage> {
                                                     ),
                                                   ),
                                                   TextSpan(
-                                                    text: ' m',
+                                                    text: ' ft',
                                                     style: GoogleFonts.poppins(
                                                         fontWeight: FontWeight.w300,
                                                         color: Colors.black),
@@ -378,7 +455,8 @@ class _postPageState extends State<postPage> {
                                                       child: Text(
                                                         '2',
                                                         style: GoogleFonts.galdeano(
-                                                            fontSize: 14
+                                                            fontSize: 14,
+                                                          color: Colors.black
                                                         ),
                                                       ),
                                                     ),
@@ -492,9 +570,7 @@ class _postPageState extends State<postPage> {
                                         highlightColor:Colors.white,
                                         hoverColor: Colors.white10,
                                         onPressed: (){
-                                          setState(() {
-                                            navIndex = 6;
-                                          });
+                                          infoCard('Agents Contact Info:', userPostData['agentNumber']);
                                         },
                                         icon:Text(
                                           'Contact Agent',
@@ -630,6 +706,17 @@ class _postPageState extends State<postPage> {
                               width: .5,
                             )
                         ),
+                     child:   GoogleMap(
+                          initialCameraPosition: CameraPosition(target: LatLng(userPostData['mapLocation'].latitude, userPostData['mapLocation'].longitude),zoom: 18),
+                          markers: {
+                            Marker(
+                              markerId: const MarkerId('Property Location'),
+                              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+                              position: LatLng(userPostData['mapLocation'].latitude, userPostData['mapLocation'].longitude),
+                            )
+                          },
+
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -645,9 +732,10 @@ class _postPageState extends State<postPage> {
                           ),
                           child: IconButton(
                               onPressed: (){
-                                setState(() {
-                                  navIndex = 6;
-                                });
+                                Navigator.of(context).push(PageTransition(
+                                    child: mapPage(loca: userPostData['mapLocation']),
+                                    type: PageTransitionType.bottomToTop,
+                                    duration: const Duration(milliseconds: 300)));
                               },
                               icon:Text(
                                 'Map Location ',

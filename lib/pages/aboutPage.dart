@@ -4,9 +4,9 @@ import 'package:housing_information_website/impVariable.dart';
 import 'package:housing_information_website/themes/theme.dart';
 import 'package:housing_information_website/widgets/pageHeader.dart';
 
-import '../widgets/serviceCard1.dart';
-
 class aboutPage extends StatelessWidget {
+  const aboutPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     Color selectedColor = Theme.of(context).colorScheme.secondary;
@@ -19,17 +19,23 @@ class aboutPage extends StatelessWidget {
           child: SizedBox(
             width: 900,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Hero Image
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: basicShadow,
-                    shape: BoxShape.circle
-                  ),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage(jeLogo),
-                    radius: 180,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        boxShadow: basicShadow,
+                        shape: BoxShape.circle
+                      ),
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(jeLogo),
+                        radius: 180,
+                      ),
+                    ),
+                  ],
                 ),
               sbH10,sbH2,sbH2,
                 // About Us Section
@@ -110,94 +116,28 @@ class aboutPage extends StatelessWidget {
                 ),
                 sbH2,sbH2,sbH2,sbH2,sbH20,
                 // Domain Name Section
-                Text(
-                  "Domain Name",
-                  style: GoogleFonts.poppins(
-                    color: selectedColor,
-                    fontSize: 40,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                sbH2,sbH2,sbH2,sbH10,
-                Text(
-                  "www.josmartrealestate.com",
-                  style: GoogleFonts.poppins(
-                      color: Colors.black,
-                      fontSize: 20
-                  ),
-                ),
-                sbH2,sbH2,sbH2,sbH2,sbH20,
-                // Images Section
-                Text(
-                  "Images",
-                  style: GoogleFonts.poppins(
-                    color: selectedColor,
-                    fontSize: 40,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                sbH10,
-                GridView.count(
-                  crossAxisCount: 2,
-                  childAspectRatio: 3/2,
-                  shrinkWrap: true,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: basicShadow,
-                          image: DecorationImage(
-                              image: AssetImage(constructionImage),
-                            fit: BoxFit.fill,
-                          )
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: basicShadow,
-                          image: DecorationImage(
-                              image: AssetImage(constructionImage),
-                            fit: BoxFit.fill,
-                          )
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: basicShadow,
-                          image: DecorationImage(
-                              image: AssetImage(constructionImage),
-                            fit: BoxFit.fill,
-                          )
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: basicShadow,
-                          image: DecorationImage(
-                              image: AssetImage(constructionImage),
-                            fit: BoxFit.fill,
-                          )
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                sbH2,sbH2,sbH2,sbH2,sbH20,
-                const pageHeader(title: 'Our Founder', fontSize: 30, mainAxisAlignment: MainAxisAlignment.center, fontWeight: FontWeight.w600, height: 5, width: 60),
+               Row(
+                 children: [
+                   Text(
+                     "Domain Name: ",
+                     style: GoogleFonts.poppins(
+                       color: selectedColor,
+                       fontSize: 40,
+                       fontWeight: FontWeight.w500,
+                     ),
+                   ),
+                   sbH2,sbH2,sbH2,sbH10,
+                   Text(
+                     "www.josmartrealestate.com",
+                     style: GoogleFonts.poppins(
+                         color: Colors.black,
+                         fontSize: 20
+                     ),
+                   ),
+                 ],
+               ),
+                sbH25,
+                const pageHeader(title: 'Our Founder', fontSize: 40, mainAxisAlignment: MainAxisAlignment.center, fontWeight: FontWeight.w600, height: 5, width: 60),
                 sbH20,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

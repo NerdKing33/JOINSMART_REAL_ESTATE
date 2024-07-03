@@ -2,13 +2,13 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/themes/theme.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class areaDetails extends StatefulWidget {
   areaDetails({
     super.key,
     required this.textController,
   });
-
   TextEditingController textController = TextEditingController();
 
   @override
@@ -16,9 +16,9 @@ class areaDetails extends StatefulWidget {
 }
 
 class _areaDetailsState extends State<areaDetails> {
-  final String hint = 'Area (m^2)';
+  final String hint = 'Area ';
 
-  final icon = Icons.landscape_outlined;
+  final icon = MdiIcons.landPlotsMarker;
   final List item = [
     '1',
     '2',
@@ -103,14 +103,37 @@ class _areaDetailsState extends State<areaDetails> {
                     width: 5,
                   ),
                   Expanded(
-                    child: Text(
-                      hint,
-                      style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.grey[800]
+                    child:     RichText(
+                      text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: hint,
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black),
+                            ),
+                            TextSpan(
+                              text: ' ft',
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black),
+                            ),
+                            WidgetSpan(
+                              child: Transform.translate(
+                                offset: const Offset(2, -4),
+                                child: Text(
+                                  '2',
+                                  style: GoogleFonts.galdeano(
+                                      fontSize: 14,
+                                    color: Colors.black
+                                  ),
+                                ),
+                              ),
+                            )
+                          ]
                       ),
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],

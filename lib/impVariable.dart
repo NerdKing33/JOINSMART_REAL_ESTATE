@@ -1,17 +1,4 @@
 import 'package:flutter/material.dart';
-
-FontWeight w100 = FontWeight.w100;
-FontWeight w200 = FontWeight.w200;
-FontWeight w300 = FontWeight.w300;
-FontWeight w400 = FontWeight.w400;
-FontWeight w500 = FontWeight.w500;
-FontWeight w600 = FontWeight.w600;
-FontWeight w700 = FontWeight.w700;
-FontWeight w800 = FontWeight.w800;
-FontWeight w900 = FontWeight.w900;
-FontWeight wBold = FontWeight.bold;
-FontWeight wNrml = FontWeight.normal;
-
 String jeLogo = 'lib/images/jeLogo.jpg';
 String dpImage = 'lib/images/dp.jpg';
 String constructionImage = 'lib/images/constructionImage.png';
@@ -32,14 +19,12 @@ String hs4 = 'lib/images/hs4.jpg';
 String hs5 = 'lib/images/hs5.jpg';
 String avatar = 'lib/images/avatar.jpg';
 
-
-
 String title = 'Joinsmart Estates';
 String userName = 'KWAME PETER MUSHI';
 String titleCptl = 'JOINSMART ESTATES ';
+
 int navIndex =0;
 int navIndex2 =0;
-
 
 SizedBox sb0 = const SizedBox(width: 0);
 SizedBox sb2 = const SizedBox(width: 2);
@@ -86,17 +71,6 @@ SizedBox sbH85 = const SizedBox(height: 85,);
 SizedBox sbH90 = const SizedBox(height: 90,);
 SizedBox sbH95 = const SizedBox(height: 95,);
 SizedBox sbH100 = const SizedBox(height: 100,);
-
-LinearGradient blueGradient = LinearGradient(
-  begin: Alignment.topCenter,
-  end: Alignment.center,
-  colors: [
-    Colors.blue.shade800,
-    Colors.blue.shade700,
-    Colors.blue.shade600,
-  ],
-  transform:  const GradientRotation(.0),
-);
 
 List<BoxShadow> basicShadow = [
   BoxShadow(

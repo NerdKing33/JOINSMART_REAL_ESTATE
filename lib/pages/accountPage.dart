@@ -3,12 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/impVariable.dart';
+import 'package:housing_information_website/pages/multiUploadPage.dart';
+import 'package:housing_information_website/pages/propertyManagmentPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
 import 'package:housing_information_website/widgets/containers/quickAccessContainer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../resources/auth.dart';
-import '../utils.dart';
+import '../resources/utils.dart';
 import '../widgets/pageHeader.dart';
 
 class accountPage extends StatefulWidget {
@@ -41,7 +44,9 @@ class _accountPageState extends State<accountPage> {
       userData = snap.data()!;
       setState(() {});
     } catch (err) {
-      showSnackBar(err.toString(),context);
+      setState(() {
+        showSnackBar(err.toString(),context);
+      });
     }
   }
 
@@ -103,14 +108,7 @@ class _accountPageState extends State<accountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: pRed,
-      appBar: AppBar(
-        title: const pageHeader(title: 'Account Page', fontSize: 20, mainAxisAlignment: MainAxisAlignment.center, fontWeight: FontWeight.w500, height: 5, width: 60),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
-      body:
-     userData.isEmpty?Center(
+      body: userData.isEmpty?Center(
        child: Container(
          padding: const EdgeInsets.all(10.0),
          width: 300,
@@ -128,29 +126,28 @@ class _accountPageState extends State<accountPage> {
        ),
      ): Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // // Profile Picture
-                // Container(
-                //   padding: const EdgeInsets.all(20.0),
-                //   width: 350,
-                //   height: 350,
-                //   decoration: BoxDecoration(
-                //       color: pRed,
-                //       borderRadius: BorderRadius.circular(20.0),
-                //       image: DecorationImage(
-                //           image: userData['profilePic']!=null?NetworkImage(userData['profilePic']):AssetImage(avatar),
-                //           fit: BoxFit.cover
-                //       )
-                //   ),
-                // ),
-                // sb20,
+                sbH20,
+                // Profile Picture
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  height: 350,
+                  width: 350,
+                  decoration: BoxDecoration(
+                      color: pRed,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: userData['profilePic']!=''?NetworkImage(userData['profilePic']):AssetImage(avatar),
+                          fit: BoxFit.cover
+                      )
+                  ),
+                ),
+                sbH20,
                 Container(
                   width: 600,
                   padding: const EdgeInsets.all(20.0),
@@ -180,9 +177,16 @@ class _accountPageState extends State<accountPage> {
                               child: IconButton(
                                 tooltip:'Upload New Property',
                                 icon:Icon(Icons.upload_outlined, color: lRed,),
-                                onPressed: (){ Navigator.pushNamed(context, '/multiUploadPage');},
+                                onPressed: (){ Navigator.of(context).push(
+                                    PageTransition(
+                                        duration: const Duration(milliseconds: 300),
+                                        child:  const multiUploadPage(),
+                                        type: PageTransitionType.bottomToTop
+                                    )
+                                );
+                                  },
                               ),
-                            ), text: 'Upload', func: () { Navigator.pushReplacementNamed(context, '/uploadPage'); },),
+                            ), text: 'Upload', func: () {},),
                             quickAccessContainer(icon: Container(
                               padding: const EdgeInsets.all(.0),
                               decoration:  BoxDecoration(
@@ -192,7 +196,14 @@ class _accountPageState extends State<accountPage> {
                               child: IconButton(
                                 tooltip:'Manage Existing Posts',
                                 icon:Icon(Icons.real_estate_agent_outlined, color: lRed,),
-                                onPressed: (){},
+                                onPressed: (){ Navigator.of(context).push(
+                                    PageTransition(
+                                        duration: const Duration(milliseconds: 300),
+                                        child:  const propertyManagementPage(),
+                                        type: PageTransitionType.bottomToTop
+                                    )
+                                );
+                                },
                               ),
                             ), text: 'Posts', func: () {  },),
                             quickAccessContainer(icon: Container(
@@ -473,19 +484,19 @@ class _accountPageState extends State<accountPage> {
                     ),
                   ),
                 ),
+                sbH50,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('by nk',
+                      style: GoogleFonts.rajdhani(
+                        color: const Color.fromRGBO(3, 5, 77, .3),
+                        fontSize: 13,
+                      ),),
+                  ],
+                )
               ],
             ),
-            sbH50,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('by nk',
-                  style: GoogleFonts.rajdhani(
-                    color: const Color.fromRGBO(3, 5, 77, .3),
-                    fontSize: 13,
-                  ),),
-              ],
-            )
           ],
         ),
       ),

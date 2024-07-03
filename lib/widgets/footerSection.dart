@@ -5,6 +5,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../impVariable.dart';
 
 class footerSection extends StatelessWidget {
+  const footerSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
