@@ -9,10 +9,8 @@ import 'package:housing_information_website/themes/theme.dart';
 import 'package:housing_information_website/widgets/containers/quickAccessContainer.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../resources/auth.dart';
 import '../resources/utils.dart';
-import '../widgets/pageHeader.dart';
 
 class accountPage extends StatefulWidget {
 

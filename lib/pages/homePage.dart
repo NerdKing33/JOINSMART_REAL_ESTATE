@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:housing_information_website/pages/postPage.dart';
 import 'package:housing_information_website/widgets/footerSection.dart';
 import 'package:housing_information_website/widgets/homePagePostStrip.dart';
 import '../widgets/homePageStripComputerScrn/homePgStrip1.dart';
@@ -17,12 +16,6 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> with TickerProviderStateMixin{
   late double abHeight = 0;
-  late AnimationController _controller;
-  late Animation<double> _avatarRadiusAnimation;
-  late Animation<double> _sliverABAnimation;
-  late Animation<double> _textAnimation;
-  late Animation<double> _mapWidthAnimation;
-  late Animation<double> _mapHeightAnimation;
   late BoxFit _boxFit = BoxFit.cover;
 
   int _current = 0;
@@ -46,20 +39,6 @@ class _homePageState extends State<homePage> with TickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this,duration: const Duration(milliseconds: 600 ))..forward();
-    _mapWidthAnimation = Tween(begin: 0.0, end: 120.0).animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
-    _mapHeightAnimation = Tween(begin: 0.0, end: 60.0).animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
-    _avatarRadiusAnimation = Tween(begin: 0.0, end: 15.0).animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
-    _sliverABAnimation = Tween(begin: 0.0, end: 200.0).animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
-    _textAnimation = Tween(begin: 0.0, end: 20.0).animate(CurvedAnimation(parent: _controller, curve: Curves.ease));
-    _controller.addListener(() {setState(() {});});
-    _controller.addStatusListener((status) {
-      if(status == AnimationStatus.completed){
-        _controller.stop();
-      }else if(status == AnimationStatus.dismissed){
-        _controller.forward();
-      }
-    });
     changeImage();
   }
   void picResize(){
