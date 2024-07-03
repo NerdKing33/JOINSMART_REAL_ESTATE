@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -27,11 +28,14 @@ class postPage extends StatefulWidget {
 class _postPageState extends State<postPage> {
   var userPostData = {};
   List<dynamic> images = [];
+  bool isBookmarked = false;
+  bool isSaveLoading = false;
 
   @override
   void initState() {
     super.initState();
     postData();
+    isSaved();
   }
   
   postData() async {
@@ -42,7 +46,6 @@ class _postPageState extends State<postPage> {
           .get();
       userPostData = snap.data()!;
       setState(() {});
-      images.add(await userPostData['mainPost']);
       images.addAll(await userPostData['secondaryPosts']);
     } catch (err) {
       setState(() {
@@ -50,6 +53,31 @@ class _postPageState extends State<postPage> {
       });
     }
   }
+  isSaved()async{
+    bool saved = await storageMethods().isBookMarkedPost(widget.postId, FirebaseAuth.instance.currentUser!.uid, await userPostData['saved']);
+    setState(() {
+      isBookmarked=saved;
+    });
+  }
+
+ void savePost () async {
+  bool saved = await storageMethods().bookmarkPost(
+  widget.postId,
+    FirebaseAuth.instance.currentUser!.uid,
+  await userPostData['saved'],
+  );
+  if (saved = true) {
+  setState(() {
+  isBookmarked = true;
+  showSnackBar('Post is Saved', context);
+  isSaveLoading=false;
+  });
+  }setState(() {
+  isBookmarked = false;
+  showSnackBar('Post unSaved', context);
+  isSaveLoading=false;
+  });
+}
 
   _deletePost(BuildContext context) async {
     return showDialog(
@@ -204,7 +232,7 @@ class _postPageState extends State<postPage> {
         height: 790,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
-            color: Colors.grey.shade100,
+            color: Colors.grey.shade300,
         ),
         child: Column(
           children: [
@@ -231,14 +259,27 @@ class _postPageState extends State<postPage> {
                     child: Row(
                       children: [
                         IconButton(
+                          tooltip:'Save Post',
                             highlightColor: lRed,
                             hoverColor: pRed,
-                            onPressed: (){},
+                            onPressed: (){
+                  setState(() {
+                  isSaveLoading = true;
+                  });
+                  savePost();
+                  },
+                            isSelected: isBookmarked,
+                            selectedIcon:Icon(
+                              Icons.bookmark,
+                              color: lRed,
+                            ),
                             icon: Icon(
                               Icons.bookmark_add_outlined,
                               color: lRed,
-                            )),
+                            )
+                        ),
                         IconButton(
+                            tooltip:'Close Post',
                             highlightColor: lRed,
                             hoverColor: pRed,
                             onPressed: (){
@@ -264,22 +305,43 @@ class _postPageState extends State<postPage> {
                     child: Row(
                       children: [
                         IconButton(
+                            tooltip:'Save Post',
                             highlightColor: lRed,
                             hoverColor: pRed,
-                            onPressed: (){},
-                            icon: Icon(
+                            onPressed: (){
+                              setState(() {
+                                isSaveLoading = true;
+                              });
+                              savePost();
+                            },
+                            isSelected: isBookmarked,
+                            selectedIcon: isSaveLoading == false? Icon(
+                              Icons.bookmark,
+                              color: lRed,
+                            ):CircularProgressIndicator(
+                              color: lRed,
+                              strokeWidth: 4,
+                            ),
+                            icon: isSaveLoading == false? Icon(
                               Icons.bookmark_add_outlined,
                               color: lRed,
-                            )),
-                        IconButton(
-                            highlightColor: lRed,
-                            hoverColor: pRed,
-                            onPressed: (){},
-                            icon: Icon(
-                              Icons.edit_outlined,
+                            ):CircularProgressIndicator(
                               color: lRed,
-                            )),
+                              strokeWidth: 4,
+                            )
+                        ),
+                        ///postEditFeature
+                        // IconButton(
+                        //     tooltip:'Edit Post',
+                        //     highlightColor: lRed,
+                        //     hoverColor: pRed,
+                        //     onPressed: (){},
+                        //     icon: Icon(
+                        //       Icons.edit_outlined,
+                        //       color: lRed,
+                        //     )),
                         IconButton(
+                            tooltip:'Delete Post',
                             hoverColor: pRed,
                             highlightColor: lRed,
                             onPressed: () {
@@ -290,6 +352,7 @@ class _postPageState extends State<postPage> {
                               color: lRed,
                             )),
                         IconButton(
+                            tooltip:'Cancel Post',
                             highlightColor: lRed,
                             hoverColor: pRed,
                             onPressed: (){
@@ -314,23 +377,52 @@ class _postPageState extends State<postPage> {
                 children: [
                   SizedBox(
                     height: 410,
-                    width: 300,
+                    width: 350,
                     child: Container(
                       decoration:  BoxDecoration(
-                        color: Colors.white,
+                        color: pRed,
                         borderRadius: BorderRadius.circular(15.0),
-                        image:  DecorationImage(
-                            fit: BoxFit.cover,
-                            image:NetworkImage(
-                                '${userPostData['mainPost']}'
-                            )
+                        // image:  DecorationImage(
+                        //     fit: BoxFit.cover,
+                        //     image:NetworkImage(
+                        //         '${userPostData['mainPost']}'
+                        //     )
+                        // ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15.0),
+                        child: Image.network(
+                          '${userPostData['mainPost']}',
+                          scale: 1,
+                          fit: BoxFit.cover,
+                          errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                            return  Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.error_outline,
+                                      color: lRed,
+                                      size: 50,
+                                    ),
+                                    Text(
+                                      exception.toString(),
+                                      style: GoogleFonts.rajdhani(color: lRed,fontSize: 20,fontWeight: FontWeight.w400),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
                     ),
                   ),
                   sb10,
                   SizedBox(
-                    width: 620,
+                    width: 570,
                     height: 420,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,7 +431,7 @@ class _postPageState extends State<postPage> {
                           children: [
                             Container(
                               padding: const EdgeInsets.all(10.0),
-                              width: 440,
+                              width: 390,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15.0),
@@ -486,7 +578,7 @@ class _postPageState extends State<postPage> {
                                                     ),
                                                   ),
                                                   TextSpan(
-                                                    text: ' floors',
+                                                    text: userPostData['noFloors'] == '1' ? ' floor':' floors',
                                                     style: GoogleFonts.poppins(
                                                         fontWeight: FontWeight.w300,
                                                         color: Colors.black),
@@ -655,13 +747,42 @@ class _postPageState extends State<postPage> {
                                   height: 260,
                                   width: 260,
                                   decoration:BoxDecoration(
-                                      color: Colors.white,
+                                      color: pRed,
                                       borderRadius: BorderRadius.circular(15.0),
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                            images[index],
-                                          )
-                                      )
+                                      // image: DecorationImage(
+                                      //     image: NetworkImage(
+                                      //       images[index],
+                                      //     )
+                                      // )
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    child: Image.network(
+                                      images[index],
+                                      scale: 1,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                        return  Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.error_outline,
+                                                  color: lRed,
+                                                  size: 50,
+                                                ),
+                                                Text(
+                                                  exception.toString(),
+                                                  style: GoogleFonts.rajdhani(color: lRed,fontSize: 20,fontWeight: FontWeight.w400),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -701,22 +822,21 @@ class _postPageState extends State<postPage> {
                         decoration: BoxDecoration(
                             color: Colors.green.shade100,
                             borderRadius: BorderRadius.circular(15.0),
-                            border: Border.all(
-                              color: Colors.green.shade600,
-                              width: .5,
-                            )
                         ),
-                     child:   GoogleMap(
-                          initialCameraPosition: CameraPosition(target: LatLng(userPostData['mapLocation'].latitude, userPostData['mapLocation'].longitude),zoom: 18),
-                          markers: {
-                            Marker(
-                              markerId: const MarkerId('Property Location'),
-                              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-                              position: LatLng(userPostData['mapLocation'].latitude, userPostData['mapLocation'].longitude),
-                            )
-                          },
+                     child:   ClipRRect(
+                       borderRadius: BorderRadius.circular(15.0),
+                       child: GoogleMap(
+                            initialCameraPosition: CameraPosition(target: LatLng(userPostData['mapLocation'].latitude, userPostData['mapLocation'].longitude),zoom: 18),
+                            markers: {
+                              Marker(
+                                markerId: const MarkerId('Property Location'),
+                                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+                                position: LatLng(userPostData['mapLocation'].latitude, userPostData['mapLocation'].longitude),
+                              )
+                            },
 
-                        ),
+                          ),
+                     ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),

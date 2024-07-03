@@ -60,7 +60,7 @@ class _propertyCardState extends State<propertyCard> {
           width: MediaQuery.of(context).size.width*.8,
           padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.transparent,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Column(
@@ -68,25 +68,42 @@ class _propertyCardState extends State<propertyCard> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                flex: 6,
+                flex: 3,
                 child: Container(
                   decoration: BoxDecoration(
                       color: pRed,
                       borderRadius: const BorderRadius.vertical(top: Radius.circular(0.0)),
-                      // image: DecorationImage(
-                      //   image: NetworkImage('${widget.postId['mainPost']}'),
-                      //   fit: BoxFit.cover,
-                      // )
                   ),
                   child: Image.network(
                       widget.postId['mainPost'],
                     scale: 1,
                     fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                      return  Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.error_outline,
+                                color: lRed,
+                                size: 50,
+                              ),
+                              Text(
+                                exception.toString(),
+                                style: GoogleFonts.rajdhani(color: lRed,fontSize: 20,fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
               Expanded(
-                flex: 4,
+                flex: 2,
                 child: Container(
                   padding: const EdgeInsets.only(top: 10.0),
                   decoration: const BoxDecoration(

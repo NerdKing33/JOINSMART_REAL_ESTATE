@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:housing_information_website/impVariable.dart';
+import 'package:housing_information_website/themes/theme.dart';
 
-import '../../impVariable.dart';
 import '../../resources/firebaseStorage.dart';
 import '../../resources/utils.dart';
-import '../../themes/theme.dart';
 
-class myPostContainer extends StatefulWidget {
- final  Map<String, dynamic>  postId;
- final  String  userId;
-  const myPostContainer({super.key, required this.postId, required this.userId});
+class postContainer extends StatefulWidget {
+final  Map<String, dynamic>  postId;
+const postContainer({super.key, required this.postId});
 
   @override
-  State<myPostContainer> createState() => _myPostContainerState();
+  State<postContainer> createState() => _postContainerState();
 }
 
-class _myPostContainerState extends State<myPostContainer> {
-  _removePost(BuildContext context, ) async {
+class _postContainerState extends State<postContainer> {
+  _deletePost(BuildContext context, ) async {
     return showDialog(
         context: context,
         builder: (context) {
@@ -26,7 +25,7 @@ class _myPostContainerState extends State<myPostContainer> {
             ),
             backgroundColor: lRed,
             title: Text(
-              'Do You Want To Remove Post',
+              'Do You Want To Delete Post',
               style: GoogleFonts.galdeano(
                 color: Colors.white,
                 fontSize: 20,
@@ -42,7 +41,7 @@ class _myPostContainerState extends State<myPostContainer> {
                   ),
                 ),
                 onPressed: () async {
-                  String res = await storageMethods().removePost(widget.postId['postId'],widget.userId);
+                  String res = await storageMethods().deletePost(widget.postId['postId']);
                   if (res == 'success') {
                     setState(() {
                       showSnackBar(res,context);
@@ -88,11 +87,11 @@ class _myPostContainerState extends State<myPostContainer> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                    color: pRed,
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(widget.postId['mainPost'])),
-                    borderRadius: BorderRadius.circular(15.0)
+                color: pRed,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                      image: NetworkImage(widget.postId['mainPost'])),
+                  borderRadius: BorderRadius.circular(15.0)
                 ),
               ),
             ),
@@ -124,24 +123,24 @@ class _myPostContainerState extends State<myPostContainer> {
             // sbH10,
             GestureDetector(
               onTap: (){
-                _removePost(context);
+                _deletePost(context);
               },
               child: Container(
                 padding: const EdgeInsets.all(15.0),
                 decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(color: lRed,width: .5)
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(15.0),
+                  border: Border.all(color: lRed,width: .5)
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'REMOVE',
+                      'DELETE',
                       style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          color: lRed,
-                          fontWeight: FontWeight.w400
+                        fontSize: 18,
+                        color: lRed,
+                        fontWeight: FontWeight.w400
                       ),
                     ),
                   ],

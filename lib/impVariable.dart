@@ -49,6 +49,7 @@ SizedBox sb90 = const SizedBox(width: 90,);
 SizedBox sb95 = const SizedBox(width: 95,);
 SizedBox sb100 = const SizedBox(width: 100,);
 
+SizedBox sbH0 = const SizedBox(height: 0);
 SizedBox sbH2 = const SizedBox(height: 2);
 SizedBox sbH5 = const SizedBox(height: 5);
 SizedBox sbH8 = const SizedBox(height: 8);

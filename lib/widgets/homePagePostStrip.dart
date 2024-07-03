@@ -27,14 +27,51 @@ class _homePagePostStripState extends State<homePagePostStrip> {
        builder: (BuildContext context,
            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
          if (snapshot.connectionState == ConnectionState.waiting) {
-           return Center(
-             child: SizedBox(
-               height: 100,
-               width: 100,
-               child: CircularProgressIndicator(
-                 strokeWidth: 5,
-                 color: Colors.red.shade400,
-               ),
+           return Container(
+             padding: const EdgeInsets.all(20.0),
+             decoration: BoxDecoration(
+               color: Colors.grey[100],
+             ),
+             child: Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+               crossAxisAlignment: CrossAxisAlignment.center,
+               children: [
+                 Container(
+                   width: 300,
+                   height: 300,
+                   padding: const EdgeInsets.all(10.0),
+                   decoration: BoxDecoration(
+                     color: Colors.white,
+                     boxShadow: basicShadow,
+                     borderRadius: BorderRadius.circular(15.0)
+                   ),
+                   child: Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     crossAxisAlignment: CrossAxisAlignment.center,
+                     children: [
+                       Center(
+                         child: SizedBox(
+                           height: 100,
+                           width: 100,
+                           child: CircularProgressIndicator(
+                             strokeWidth: 5,
+                             color: Colors.red.shade400,
+                           ),
+                         ),
+                       ),
+                       sbH10,
+                       Text(
+                         'Loading Up Properties',
+                         style: GoogleFonts.rajdhani(
+                           fontSize: 18,
+                           color: Colors.black
+                         ),
+                       ),
+                       sb20
+                     ],
+                   ),
+                 ),
+               ],
              ),
            );
          }

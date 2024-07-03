@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/impVariable.dart';
 import 'package:housing_information_website/pages/logInPage.dart';
+import 'package:housing_information_website/pages/navigationPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
 import 'package:page_transition/page_transition.dart';
 import '../resources/auth.dart';
@@ -89,9 +90,10 @@ class _signUpPageState extends State<signUpPage> {
                             hoverColor: Colors.white10,
                             highlightColor: pRed,
                             onPressed: (){
-                              setState(() {
-                                Navigator.pushReplacementNamed(context, '/navigationPage');
-                              });
+                              Navigator.of(context).pushReplacement(PageTransition(
+                                  duration: const Duration(milliseconds: 250),
+                                  child: const navigationPage(),
+                                  type: PageTransitionType.bottomToTop));
                             },
                             icon: Row(
                               children: [

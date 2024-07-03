@@ -73,38 +73,35 @@ class storageMethods {
   }
 
   //likingAPost
-  Future<String> likePost(
+  Future<bool>  bookmarkPost(
     String postId,
     String uid,
-    List likes,
+    List saved,
   ) async {
-    String liked = '';
-    try {
-      if (likes.contains(uid)) {
-        _store.collection('Posts').doc(postId).update({
-          'likes': FieldValue.arrayRemove([uid]),
-        });
-        liked = 'false';
-      } else {
+    bool liked = false;
+      if (saved.contains(uid)) {
         await _store.collection('Posts').doc(postId).update({
-          'likes': FieldValue.arrayUnion([uid]),
+          'saved': FieldValue.arrayRemove([uid]),
         });
-        liked = 'true';
+        liked = false;
       }
-    } catch (err) {
-      err.toString();
-    }
+      else {
+        await _store.collection('Posts').doc(postId).update({
+          'saved': FieldValue.arrayUnion([uid]),
+        });
+        liked = true;
+      }
     return liked;
   }
 
-  //checkingIfPostIsLiked
-  Future<bool> isLikedPost(
+  //checkingIfPostIsSaved
+  Future<bool> isBookMarkedPost(
     String postId,
     String uid,
-    List likes,
+    List saved,
   ) async {
     bool liked = false;
-    if (likes.contains(uid)) {
+    if (saved.contains(uid)) {
       liked = true;
     } else {
       liked = false;
@@ -117,6 +114,19 @@ class storageMethods {
     String deleted = 'error';
     try {
       await _store.collection('Posts').doc(postId).delete();
+      deleted = 'success';
+    } catch (err) {
+      deleted = err.toString();
+    }
+    return deleted;
+  }
+
+  Future<String> removePost(postId,uid) async {
+    String deleted = 'error';
+    try {
+      await _store.collection('Posts').doc(postId).update({
+        'saved': FieldValue.arrayRemove([uid]),
+      });
       deleted = 'success';
     } catch (err) {
       deleted = err.toString();

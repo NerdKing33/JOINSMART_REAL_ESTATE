@@ -10,7 +10,6 @@ import 'package:housing_information_website/pages/navigationPage.dart';
 import 'package:housing_information_website/pages/propertiesPage.dart';
 import 'package:housing_information_website/pages/servicesPage.dart';
 import 'package:housing_information_website/pages/signUpPage.dart';
-import 'package:housing_information_website/pages/videoUploadPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
 
 import 'firebase_options.dart';
@@ -44,7 +43,6 @@ class _MyAppState extends State<MyApp> {
         '/navigationPage' : (context) => const navigationPage(),
         '/signUpPage' : (context) => const signUpPage(),
         '/multiUploadPage' : (context) => const multiUploadPage(),
-        '/videoUploadPage' : (context) => const videoUploadPage(),
         '/servicesPage' : (context) => const servicesPage(),
         '/aboutPage' : (context) =>  const aboutPage(),
         '/logInPage' : (context) =>  const logInPage(),

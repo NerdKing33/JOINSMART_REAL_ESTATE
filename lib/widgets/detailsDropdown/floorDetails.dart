@@ -89,7 +89,7 @@ class _floorDetailsState extends State<floorDetails> {
                   .map((item) => DropdownMenuItem<String>(
                 value: item,
                 child: Text(
-                  item,
+                 item == '1'? '$item floor':'$item floors',
                   style: GoogleFonts.poppins(
                       fontSize: 18,
                       fontWeight: FontWeight.w300,

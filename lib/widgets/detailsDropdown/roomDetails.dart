@@ -90,7 +90,7 @@ class _roomDetailsState extends State<roomDetails> {
                   .map((item) => DropdownMenuItem<String>(
                 value: item,
                 child: Text(
-                  item,
+                  item == '1'? '$item room':'$item rooms',
                   style: GoogleFonts.poppins(
                       fontSize: 18,
                       fontWeight: FontWeight.w300,

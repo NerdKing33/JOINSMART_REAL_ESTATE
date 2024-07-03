@@ -19,7 +19,7 @@ class textInput extends StatelessWidget {
     required this.obscureText,
     required this.textInputType,
     required this.textCapitalization,
-    required this.validation,
+    this.validation,
   });
 
   @override

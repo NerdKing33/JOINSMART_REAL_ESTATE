@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:housing_information_website/impVariable.dart';
 
-import '../impVariable.dart';
-
-class footerSection extends StatelessWidget {
+class footerSection extends StatefulWidget {
   const footerSection({super.key});
 
+  @override
+  State<footerSection> createState() => _footerSectionState();
+}
+
+class _footerSectionState extends State<footerSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,63 +22,79 @@ class footerSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'About Us',
-                    style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                      'Our Story',
-                    style: GoogleFonts.poppins(fontSize: 14),
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                    },
-                    child: Text(
-                        'Meet Our Founder',
-                        style: GoogleFonts.poppins(fontSize: 14),
-                        ),
-                  ),
-                  Text(
-                      'Our Values',
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    navIndex =3;
+                  });
+                  Navigator.pushReplacementNamed(context, '/navigationPage');
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'About Us',
+                      style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                        'Our Story',
                       style: GoogleFonts.poppins(fontSize: 14),
-    ),
-                ],
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                      },
+                      child: Text(
+                          'Meet Our Founder',
+                          style: GoogleFonts.poppins(fontSize: 14),
+                          ),
+                    ),
+                    Text(
+                        'Our Values',
+                        style: GoogleFonts.poppins(fontSize: 14),
+                    ),
+                  ],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Services',
-                    style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                      'Real Estate Agency',
-                    style: GoogleFonts.poppins(fontSize:14,)
-                  ),
-                  Text(
-                      'Facility Management',
-                    style: GoogleFonts.poppins(fontSize: 14),
-                  ),
-                  Text(
-                      'Designing Homes',
-                    style: GoogleFonts.poppins(fontSize: 14),
-                  ),
-                  Text(
-                      'Renovating Homes',
-                    style: GoogleFonts.poppins(fontSize: 14),
-                  ),
-                  Text(
-                      'Housing Units Maintenance',
-                    style: GoogleFonts.poppins(fontSize: 14),
-                  ),
-                ],
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    navIndex =2;
+                  });
+                  Navigator.pushReplacementNamed(context, '/navigationPage');
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Services',
+                      style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                        'Real Estate Agency',
+                      style: GoogleFonts.poppins(fontSize:14,)
+                    ),
+                    Text(
+                        'Facility Management',
+                      style: GoogleFonts.poppins(fontSize: 14),
+                    ),
+                    Text(
+                        'Designing Homes',
+                      style: GoogleFonts.poppins(fontSize: 14),
+                    ),
+                    Text(
+                        'Renovating Homes',
+                      style: GoogleFonts.poppins(fontSize: 14),
+                    ),
+                    Text(
+                        'Housing Units Maintenance',
+                      style: GoogleFonts.poppins(fontSize: 14),
+                    ),
+                  ],
+                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,44 +129,11 @@ class footerSection extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Follow Us',
-                    style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: <Widget>[
-                      Icon(
-                          MdiIcons.facebook
-                      ),
-                      sb5,
-                      Icon(
-                          MdiIcons.twitter
-                      ),
-                      sb5,
-                      Icon(
-                          MdiIcons.instagram
-                      ),
-                      sb5,
-                      Icon(
-                          MdiIcons.linkedin
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ],
           ),
           const SizedBox(height: 20),
           Text(
-            '© 2023 Company Name. All Rights Reserved.',
+            '© 2023 JOSMART ESTATES. All Rights Reserved.',
             style: GoogleFonts.poppins(fontSize: 14,),
           ),
         ],

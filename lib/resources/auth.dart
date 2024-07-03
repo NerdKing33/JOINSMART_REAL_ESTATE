@@ -1,5 +1,5 @@
 import 'package:housing_information_website/models/user.dart' as model;
-import 'package:housing_information_website/models/userPostModel.dart';
+import 'package:housing_information_website/models/postModel.dart';
 import 'package:housing_information_website/models/userRetakeProfilePicModel.dart' as model;
 import 'package:housing_information_website/resources/firebaseStorage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -157,6 +157,7 @@ class AuthMethods {
           propertyType: propertyType,
           noFloors: noFloors,
           paymentPeriod: paymentPeriod,
+          saved: [],
         );
         _store.collection('Posts').doc(postUid).set(userPost.detailsMapper());
         res = 'Success';
@@ -253,7 +254,7 @@ class AuthMethods {
       if (email.isNotEmpty) {
         User currentUser = _auth.currentUser!;
         model.userNewEmailModel userEmail = model.userNewEmailModel(
-          email: email,
+          userEmail: email,
           uid: currentUser.uid,
         );
         await _store

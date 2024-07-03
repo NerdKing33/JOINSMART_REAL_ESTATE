@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:housing_information_website/pages/postPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
 
-import '../widgets/containers/myPostContainer.dart';
+import '../widgets/containers/postContainer.dart';
 import '../widgets/pageHeader.dart';
 
 class propertyManagementPage extends StatefulWidget {
@@ -77,7 +76,7 @@ class _propertyManagementPageState extends State<propertyManagementPage> {
                           .docs[index]
                           .data()['postId']);
                     },
-                    child: myPostContainer(
+                    child: postContainer(
                       postId: snapshot.data!
                           .docs[index]
                           .data(),

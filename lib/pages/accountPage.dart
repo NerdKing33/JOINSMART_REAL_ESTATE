@@ -3,11 +3,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:housing_information_website/impVariable.dart';
+import 'package:housing_information_website/pages/editPages/emailChange.dart';
+import 'package:housing_information_website/pages/editPages/numberChange.dart';
+import 'package:housing_information_website/pages/editPages/profilePicChange.dart';
+import 'package:housing_information_website/pages/editPages/usernameChange.dart';
 import 'package:housing_information_website/pages/multiUploadPage.dart';
-import 'package:housing_information_website/pages/propertyManagmentPage.dart';
+import 'package:housing_information_website/pages/navigationPage.dart';
+import 'package:housing_information_website/pages/propertyManagementPage.dart';
+import 'package:housing_information_website/pages/savedPropertiesPage.dart';
 import 'package:housing_information_website/themes/theme.dart';
 import 'package:housing_information_website/widgets/containers/quickAccessContainer.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:page_transition/page_transition.dart';
 import '../resources/auth.dart';
 import '../resources/utils.dart';
@@ -76,11 +81,14 @@ class _accountPageState extends State<accountPage> {
                 onPressed: () async {
                   String res = await AuthMethods().signOut();
                   if (res == 'Success') {
-                    showSnackBar('Sgned Out', cont());
+                    showSnackBar('Signed Out', cont());
                     setState(() {
                       navIndex=0;
+                      Navigator.of(context).pushReplacement(PageTransition(
+                          duration: const Duration(milliseconds: 250),
+                          child: const navigationPage(),
+                          type: PageTransitionType.bottomToTop));
                     });
-                    Navigator.of(cont()).pushReplacementNamed('/navigationPage');
                   } else {
                     showSnackBar('Sign Out Failed', cont());
                   }
@@ -105,7 +113,7 @@ class _accountPageState extends State<accountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: pRed,
+      backgroundColor: Colors.grey[200],
       body: userData.isEmpty?Center(
        child: Container(
          padding: const EdgeInsets.all(10.0),
@@ -132,38 +140,99 @@ class _accountPageState extends State<accountPage> {
               children: [
                 sbH20,
                 // Profile Picture
-                Container(
-                  padding: const EdgeInsets.all(20.0),
-                  height: 350,
-                  width: 350,
-                  decoration: BoxDecoration(
-                      color: pRed,
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: userData['profilePic']!=''?NetworkImage(userData['profilePic']):AssetImage(avatar),
-                          fit: BoxFit.cover
-                      )
+                SizedBox(
+                  height: 360,
+                  width: 360,
+                  child: Stack(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        height: 350,
+                        width: 350,
+                        decoration: BoxDecoration(
+                            color: pRed,
+                            shape: BoxShape.circle,
+                          boxShadow: basicShadow
+                        ),
+                       child: userData['profilePic'] !=''? ClipRRect(
+                         borderRadius: BorderRadius.circular(300),
+                         child: Image.network(
+                            '${userData['profilePic']}',
+                            scale: 1,
+                            fit: BoxFit.cover,
+                            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                              return  Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.error_outline,
+                                        color: lRed,
+                                        size: 50,
+                                      ),
+                                      Text(
+                                        exception.toString(),
+                                        style: GoogleFonts.rajdhani(color: lRed,fontSize: 20,fontWeight: FontWeight.w400),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                       ):ClipRRect(
+                           borderRadius: BorderRadius.circular(500),
+                           child: Image.asset(avatar)),
+                      ),
+                     userData['profilePic'] ==''?Align(
+                        alignment:  const Alignment(.7,.8),
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            border: Border.all(
+                              color: lRed,
+                              width: .5
+                            )
+                          ),
+                          child: IconButton(
+                            icon: Icon(Icons.add_a_photo_outlined, color: lRed,size: 30,),
+                            onPressed: (){
+                            if(userData['profilePic'] == ''  ){
+                            Navigator.of(context).push(PageTransition(
+                            duration: const Duration(milliseconds: 300),
+                            child: const profilePicChange(),
+                            type: PageTransitionType.bottomToTop));
+                            }
+                            },
+                          ),
+                        ),
+                      ):sb0,
+                    ],
                   ),
                 ),
                 sbH20,
                 Container(
-                  width: 600,
+                  width: 500,
                   padding: const EdgeInsets.all(20.0),
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(20.0)
                   ),
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
-                    width: 580,
+                    width: 350,
                     decoration: BoxDecoration(
-                      color: pRed,
+                      color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Column(
                       children:  [
                         userData['userTitle'] == 'Admin' ?  Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             quickAccessContainer(icon: Container(
@@ -185,6 +254,7 @@ class _accountPageState extends State<accountPage> {
                                   },
                               ),
                             ), text: 'Upload', func: () {},),
+                            sb10,
                             quickAccessContainer(icon: Container(
                               padding: const EdgeInsets.all(.0),
                               decoration:  BoxDecoration(
@@ -204,45 +274,110 @@ class _accountPageState extends State<accountPage> {
                                 },
                               ),
                             ), text: 'Posts', func: () {  },),
-                            quickAccessContainer(icon: Container(
-                              padding: const EdgeInsets.all(.0),
-                              decoration:  BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: pRed,
-                              ),
-                              child: IconButton(
-                                tooltip:'Change The Website Contact Information',
-                                icon:Icon(Icons.contact_mail_outlined, color: lRed,),
-                                onPressed: (){},
-                              ),
-                            ), text: 'Info', func: () {  },),
-                            quickAccessContainer(icon: Container(
-                              padding: const EdgeInsets.all(.0),
-                              decoration:  BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: pRed,
-                              ),
-                              child: IconButton(
-                                tooltip:'Change Images Used in the Website',
-                                icon:Icon(Icons.photo_library_outlined, color: lRed,),
-                                onPressed: (){},
-                              ),
-                            ), text: 'Images', func: () {  },),
-                            quickAccessContainer(icon: Container(
-                              padding: const EdgeInsets.all(.0),
-                              decoration:  BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: pRed,
-                              ),
-                              child: IconButton(
-                                tooltip:'Update Services Details',
-                                icon:Icon(MdiIcons.tools, color: lRed,),
-                                onPressed: (){},
-                              ),
-                            ), text: 'Services', func: () {  },),
+                            ///quickAccessAdminFeature
+                            // quickAccessContainer(icon: Container(
+                            //   padding: const EdgeInsets.all(.0),
+                            //   decoration:  BoxDecoration(
+                            //     shape: BoxShape.circle,
+                            //     color: pRed,
+                            //   ),
+                            //   child: IconButton(
+                            //     tooltip:'Change The Website Contact Information',
+                            //     icon:Icon(Icons.contact_mail_outlined, color: lRed,),
+                            //     onPressed: (){},
+                            //   ),
+                            // ), text: 'Info', func: () {  },),
+                            // quickAccessContainer(icon: Container(
+                            //   padding: const EdgeInsets.all(.0),
+                            //   decoration:  BoxDecoration(
+                            //     shape: BoxShape.circle,
+                            //     color: pRed,
+                            //   ),
+                            //   child: IconButton(
+                            //     tooltip:'Change Images Used in the Website',
+                            //     icon:Icon(Icons.photo_library_outlined, color: lRed,),
+                            //     onPressed: (){},
+                            //   ),
+                            // ), text: 'Images', func: () {  },),
+                            // quickAccessContainer(icon: Container(
+                            //   padding: const EdgeInsets.all(.0),
+                            //   decoration:  BoxDecoration(
+                            //     shape: BoxShape.circle,
+                            //     color: pRed,
+                            //   ),
+                            //   child: IconButton(
+                            //     tooltip:'Update Services Details',
+                            //     icon:Icon(MdiIcons.tools, color: lRed,),
+                            //     onPressed: (){},
+                            //   ),
+                            // ), text: 'Services', func: () {  },),
                           ],
-                        ):sb0,
-                        userData['userTitle'] == 'Admin' ?  sbH10:sb0,
+                        ):
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            quickAccessContainer(icon: Container(
+                              padding: const EdgeInsets.all(.0),
+                              decoration:  BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: pRed,
+                              ),
+                              child: IconButton(
+                                tooltip:'See Saved Posts',
+                                icon:Icon(Icons.bookmark_border_outlined, color: lRed,),
+                                onPressed: (){ Navigator.of(context).push(
+                                    PageTransition(
+                                        duration: const Duration(milliseconds: 300),
+                                        child:   savedPropertiesPage(
+                                          userId: userData['uid'],
+                                        ),
+                                        type: PageTransitionType.bottomToTop
+                                    )
+                                );
+                                },
+                              ),
+                            ), text: 'Posts', func: () {  },),
+                            ///quickAccessAdminFeature
+                            // quickAccessContainer(icon: Container(
+                            //   padding: const EdgeInsets.all(.0),
+                            //   decoration:  BoxDecoration(
+                            //     shape: BoxShape.circle,
+                            //     color: pRed,
+                            //   ),
+                            //   child: IconButton(
+                            //     tooltip:'Change The Website Contact Information',
+                            //     icon:Icon(Icons.contact_mail_outlined, color: lRed,),
+                            //     onPressed: (){},
+                            //   ),
+                            // ), text: 'Info', func: () {  },),
+                            // quickAccessContainer(icon: Container(
+                            //   padding: const EdgeInsets.all(.0),
+                            //   decoration:  BoxDecoration(
+                            //     shape: BoxShape.circle,
+                            //     color: pRed,
+                            //   ),
+                            //   child: IconButton(
+                            //     tooltip:'Change Images Used in the Website',
+                            //     icon:Icon(Icons.photo_library_outlined, color: lRed,),
+                            //     onPressed: (){},
+                            //   ),
+                            // ), text: 'Images', func: () {  },),
+                            // quickAccessContainer(icon: Container(
+                            //   padding: const EdgeInsets.all(.0),
+                            //   decoration:  BoxDecoration(
+                            //     shape: BoxShape.circle,
+                            //     color: pRed,
+                            //   ),
+                            //   child: IconButton(
+                            //     tooltip:'Update Services Details',
+                            //     icon:Icon(MdiIcons.tools, color: lRed,),
+                            //     onPressed: (){},
+                            //   ),
+                            // ), text: 'Services', func: () {  },),
+                          ],
+                        ),
+                        userData['userTitle'] == 'Admin' ?  sbH10:sbH10,
                         userData['userTitle'] == 'Admin' ?  Container(
                             padding: const EdgeInsets.all(2.0),
                             decoration: BoxDecoration(
@@ -336,7 +471,14 @@ class _accountPageState extends State<accountPage> {
                                 child: IconButton(
                                   tooltip:  userData['username'] != null ?'Edit Info':'Add Info',
                                   icon: userData['username'] != null ? Icon(Icons.edit_outlined, color: lRed,):Icon(Icons.add, color: lRed,),
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    if(userData['username'] != null  ){
+                                      Navigator.of(context).push(PageTransition(
+                                          duration: const Duration(milliseconds: 300),
+                                          child: const usernameChange(),
+                                          type: PageTransitionType.bottomToTop));
+                                    }
+                                  },
                                 ),
                               ),
                             )):sb0,
@@ -389,9 +531,16 @@ class _accountPageState extends State<accountPage> {
                                   color: pRed,
                                 ),
                                 child: IconButton(
-                                  tooltip:  userData['username'] != null ?'Edit Info':'Add Info',
+                                  tooltip:  userData['userNumber'] != null ?'Edit Info':'Add Info',
                                   icon: userData['userNumber'] != null ? Icon(Icons.edit_outlined, color: lRed,):Icon(Icons.add, color: lRed,),
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    if(userData['userNumber'] != null  ){
+                                      Navigator.of(context).push(PageTransition(
+                                          duration: const Duration(milliseconds: 300),
+                                          child: const numberChange(),
+                                          type: PageTransitionType.bottomToTop));
+                                    }
+                                  },
                                 ),
                               ),
                             )):sb0,
@@ -446,7 +595,14 @@ class _accountPageState extends State<accountPage> {
                                 child: IconButton(
                                   tooltip:  userData['username'] != null ?'Edit Info':'Add Info',
                                   icon: userData['userEmail'] != null ? Icon(Icons.edit_outlined, color: lRed,):Icon(Icons.add, color: lRed,),
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    if(userData['userEmail'] != null  ){
+                                      Navigator.of(context).push(PageTransition(
+                                          duration: const Duration(milliseconds: 300),
+                                          child: const emailChange(),
+                                          type: PageTransitionType.bottomToTop));
+                                    }
+                                  },
                                 ),
                               ),
                             )):sb0,

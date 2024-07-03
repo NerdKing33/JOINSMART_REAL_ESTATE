@@ -50,7 +50,7 @@ servicesPageNav(){
                           fit: BoxFit.cover,
                           filterQuality: FilterQuality.high,
                           image: AssetImage(
-                            buildings,
+                          hotel,
                           )
                       ),
                       // boxShadow: basicShadow

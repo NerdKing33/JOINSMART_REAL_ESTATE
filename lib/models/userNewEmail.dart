@@ -1,13 +1,13 @@
 class userNewEmailModel {
-  final String email;
+  final String userEmail;
   final String uid;
   userNewEmailModel({
-    required this.email,
+    required this.userEmail,
     required this.uid
   });
   Map<String, dynamic> emailMapper() =>
       {
-        'email': email,
+        'userEmail': userEmail,
         'uid': uid
       };
 }

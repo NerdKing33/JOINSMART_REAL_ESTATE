@@ -1116,6 +1116,7 @@ return res;
     ),
     ),
     sb10,
+   /// secondSideUpperHalfSection(keyDetailsSection&uploadAndRestartSection)
     SizedBox(
     width: 570,
     height: 420,
@@ -1124,6 +1125,7 @@ return res;
     children: [
     Row(
     children: [
+      ///keyPostDetailsSection
     Container(
     padding: const EdgeInsets.all(10.0),
     width: 390,
@@ -1131,9 +1133,11 @@ return res;
     color: Colors.white,
     borderRadius: BorderRadius.circular(15.0),
     ),
+    ///keyPostDetailsSection1
     child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
+      ///priceAndPaymentPeriodDetailSection
     Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
@@ -1174,6 +1178,7 @@ return res;
     color: lRed,
     thickness: .5,
     ),
+      ///noBed,NoRooms,NoFloorsAndAreaDetailSection
     Row(
     children: [
     TextButton(onPressed: (){}, child: Row(
@@ -1266,14 +1271,14 @@ return res;
     text: TextSpan(
     children: [
     TextSpan(
-    text:     noFloorsController.text,
+    text:  noFloorsController.text,
     style: GoogleFonts.galdeano(
     fontSize: 20,
     color: Colors.black
     ),
     ),
     TextSpan(
-    text: ' floors',
+    text: noFloorsController.text == '1' ? ' floor':' floors',
     style: GoogleFonts.poppins(
     fontWeight: FontWeight.w300,
     color: Colors.black),
@@ -1289,6 +1294,7 @@ return res;
     color: lRed,
     thickness: .5,
     ),
+      ///locationDetailSection
     TextButton(
     onPressed: (){},
     child: Row(children: [
@@ -1318,6 +1324,7 @@ return res;
     ),
     ),
     sb5,
+      ///uploadAndRestartSection
     Container(
     width: 175,
     height: 150,
@@ -1327,6 +1334,7 @@ return res;
     ),
     child: Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    ///uploadAndRestartSection1
     children: isUploading == true ?[
       Container(
         padding: const EdgeInsets.all(10.0),
@@ -1343,7 +1351,7 @@ return res;
           )
         ),
       )
-    ]:[
+    ]: [
     Padding(
       padding: const EdgeInsets.all(3.0),
       child: GestureDetector(
@@ -1363,7 +1371,6 @@ return res;
         child:Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             Padding(
               padding: const EdgeInsets.symmetric(vertical:10.0),
               child: Text(

@@ -19,8 +19,9 @@ class postModel {
   final String propertyType;
   final String paymentPeriod;
   final GeoPoint mapLocation;
+  final List saved;
 
-  postModel({
+  postModel( {
     required this.noRooms,
       required this.noBathrooms,
       required this.area,
@@ -39,6 +40,7 @@ class postModel {
     required this.propertyType,
     required this.noFloors,
     required this.paymentPeriod,
+    required this.saved,
   });
 
   Map<String, dynamic> detailsMapper() => {
@@ -60,6 +62,7 @@ class postModel {
         'propertyType': propertyType,
         'noFloors': noFloors,
         'paymentPeriod': paymentPeriod,
+        'saved': saved,
       };
 
   static postModel fromData(DocumentSnapshot data) {
@@ -83,6 +86,7 @@ class postModel {
       propertyType: snapshot['propertyType'],
       noFloors: snapshot['noFloors'],
       paymentPeriod: snapshot['paymentPeriod'],
+      saved: snapshot['saved'],
     );
   }
 }
